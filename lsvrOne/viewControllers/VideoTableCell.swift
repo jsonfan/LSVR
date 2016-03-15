@@ -14,6 +14,8 @@ class VideoTableCell: UITableViewCell {
     @IBOutlet weak var videoDescription: UILabel!
     @IBOutlet weak var videoThumbNail: UIImageView!
     var videoIdentification: String!
+    //store video key for checking if file exists
+    var videoName: String!
     
     private var _model: Video? = nil
     

@@ -36,9 +36,21 @@ class VideoInformationViewController: UIViewController {
     var vidID: String!
     var vidURL: String!
     var vidName: String!
+    var vidFileName: String!
     var reachability: Reachability?
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        let path = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+//        let url = NSURL(fileURLWithPath: path)
+//        let filePath = url.URLByAppendingPathComponent(vidFileName+".mp4").absoluteString
+//        let fileManager = NSFileManager.defaultManager()
+//        if fileManager.fileExistsAtPath(filePath) {
+//            self.playButton.hidden = false
+//            self.vidName = vidFileName
+//            print("file exists")
+//        }
+        checkIfFileExists(vidFileName)
         // Do any additional setup after loading the view.
         videoThumbnail.image = thumbNail
         videoDescription.text = videoInformation
@@ -49,7 +61,9 @@ class VideoInformationViewController: UIViewController {
         downloadProgress.hidden = true
         
         //hide play button
-        playButton.hidden = true
+        
+        //check if file exists
+
         
     }
 
@@ -165,6 +179,21 @@ class VideoInformationViewController: UIViewController {
             let controller = navigationController.topViewController as! LogOutViewController
 //            controller.currentUserName = userCompanyName
         }
+    }
+    
+    func checkIfFileExists (fileName: String)->Bool{
+        let path = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+        let url = NSURL(fileURLWithPath: path)
+        let filePath = path+"/"+fileName+".mp4"
+        let fileManager = NSFileManager.defaultManager()
+        if fileManager.fileExistsAtPath(filePath) {
+            self.playButton.hidden = false
+            self.vidName = fileName
+            print("file exists")
+            return true
+        }
+        self.playButton.hidden = true
+        return false
     }
     
     

@@ -37,6 +37,7 @@ class DashboardViewController: UIViewController, UITableViewDelegate, UITableVie
     var videoDesc: String!
     var videoPic: UIImage!
     var videoID: String!
+    var videoFileName: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,6 +60,7 @@ class DashboardViewController: UIViewController, UITableViewDelegate, UITableVie
         let cell: VideoTableCell = tableView.dequeueReusableCellWithIdentifier("cell")! as! VideoTableCell
 
         let video: Dictionary<String, AnyObject>
+        //if video["key"] always equals video file name, then use key as a means to check if file exists. 
         video = vidsAvailable[indexPath.row]
         let thumbnailBucket = video["thumbnailBucket"] as! String
         let thumbnailKey = video["thumbnailKey"] as! String
@@ -66,6 +68,7 @@ class DashboardViewController: UIViewController, UITableViewDelegate, UITableVie
         cell.videoTitle?.text = video["name"] as! String
         cell.videoDescription?.text = video["description"] as! String
         cell.videoIdentification = video["_id"] as! String
+        cell.videoName = video["key"] as! String
         ImageLoader.sharedLoader.imageForUrl(thumbnailURL, completionHandler: {(image: UIImage?, url: String) in
             cell.videoThumbNail?.image = image!
         })
@@ -81,7 +84,8 @@ class DashboardViewController: UIViewController, UITableViewDelegate, UITableVie
         videoDesc = cell.videoDescription.text!
         videoPic = cell.videoThumbNail?.image!
         videoID = cell.videoIdentification
-        print(videoTitle, videoDesc, videoPic, videoID)
+        videoFileName = cell.videoName
+        //print(videoTitle, videoDesc, videoPic, videoID)
         performSegueWithIdentifier("segueToVideoInfo", sender: self)
     }
 
@@ -111,6 +115,7 @@ class DashboardViewController: UIViewController, UITableViewDelegate, UITableVie
             controller.userToken = currentUser["token"]
             controller.vidID = videoID
             controller.userCompanyName = userName
+            controller.vidFileName = videoFileName
             tableView.deselectRowAtIndexPath(tableView.indexPathForSelectedRow!, animated: true)
         }
         if segue.identifier == "segueToLogoutView" {
