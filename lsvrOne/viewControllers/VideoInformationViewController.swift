@@ -16,7 +16,11 @@ class VideoInformationViewController: UIViewController {
     @IBOutlet weak var videoThumbnail: UIImageView!
     @IBOutlet weak var videoDescription: UILabel!
     @IBOutlet weak var downloadProgress: UIProgressView!
+    @IBOutlet weak var downloadButton: UIButton!
+    @IBOutlet weak var playButton: UIButton!
     
+    @IBAction func playButtonTapped(sender: UIButton) {
+    }
     @IBAction func backButtonTapped(sender: UIButton) {
         dismissViewControllerAnimated(true, completion: nil)
     }
@@ -38,42 +42,14 @@ class VideoInformationViewController: UIViewController {
         // Do any additional setup after loading the view.
         videoThumbnail.image = thumbNail
         videoDescription.text = videoInformation
-        downloadProgress.transform = CGAffineTransformScale(downloadProgress.transform, 1, 20)
         
-        //reachability
-        let reachability: Reachability
-        do {
-            reachability = try Reachability.reachabilityForInternetConnection()
-        } catch {
-            print("Unable to create Reachability")
-            return
-        }
+        //sets progressbar attributes.
+        downloadProgress.transform = CGAffineTransformScale(downloadProgress.transform, 1, 30)
+        downloadProgress.setProgress(0.0, animated: false)
+        downloadProgress.hidden = true
         
-        
-        reachability.whenReachable = { reachability in
-            // this is called on a background thread, but UI updates must
-            // be on the main thread, like this:
-            dispatch_async(dispatch_get_main_queue()) {
-                if reachability.isReachableViaWiFi() {
-                    print("Reachable via WiFi")
-                } else {
-                    print("Reachable via Cellular")
-                }
-            }
-        }
-        reachability.whenUnreachable = { reachability in
-            // this is called on a background thread, but UI updates must
-            // be on the main thread, like this:
-            dispatch_async(dispatch_get_main_queue()) {
-                print("Not reachable")
-            }
-        }
-        
-        do {
-            try reachability.startNotifier()
-        } catch {
-            print("Unable to start notifier")
-        }
+        //hide play button
+        playButton.hidden = true
         
     }
 
@@ -125,6 +101,8 @@ class VideoInformationViewController: UIViewController {
         }
         //else, download:
         else {
+            downloadProgress.hidden = false
+            downloadButton.hidden = true
             print("connected to wifi")
             Alamofire.request(.GET, "http://ec2-52-91-171-36.compute-1.amazonaws.com/assets/"+vidID+"?token="+userToken)
             .responseJSON {
@@ -154,6 +132,7 @@ class VideoInformationViewController: UIViewController {
                         // reasons. To update your ui, dispatch to the main queue.
                         dispatch_async(dispatch_get_main_queue()) {
                             print("Total bytes read on main queue: \(totalBytesRead)")
+                            self.downloadProgress.setProgress(Float(totalBytesRead)/Float(totalBytesExpectedToRead), animated: true)
                         }
                     }
                     .response { _, _, _, error in
@@ -168,7 +147,8 @@ class VideoInformationViewController: UIViewController {
 //                            print(destination)
                              print ("downloaded file to = \(finalPath)")
                             self.vidName = finalPath?.lastPathComponent as String!
-                            
+                            self.playButton.hidden = false
+                            self.downloadProgress.hidden = true
                         }
                     }
                 }
