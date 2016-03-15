@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>URIs</key>
+	<string></string>
+	<key>lsvrAPIBase</key>
+	<string>http://ec2-52-91-171-36.compute-1.amazonaws.com/</string>
+</dict>
+</plist>
