@@ -40,7 +40,6 @@ class DashboardViewController: UIViewController, UITableViewDelegate, UITableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         //retrieves video list for logged in user.
         getAssets(currentUser["token"]!)
         userName = currentUser["username"]!
@@ -105,12 +104,14 @@ class DashboardViewController: UIViewController, UITableViewDelegate, UITableVie
     //function sends video information to VideoInformationViewController needed to download a video.
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "segueToVideoInfo" {
-            let controller = segue.destinationViewController as! VideoInformationViewController
+            let navigationController = segue.destinationViewController as! UINavigationController
+            let controller = navigationController.topViewController as! VideoInformationViewController
             controller.thumbNail = videoPic
             controller.videoInformation = videoDesc
             controller.userToken = currentUser["token"]
             controller.vidID = videoID
             controller.userCompanyName = userName
+            tableView.deselectRowAtIndexPath(tableView.indexPathForSelectedRow!, animated: true)
         }
         if segue.identifier == "segueToLogoutView" {
             let navigationController = segue.destinationViewController as! UINavigationController

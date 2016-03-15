@@ -346,7 +346,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="tableView" destination="hZh-dv-3Ie" id="ZIS-CV-Xjp"/>
-                        <segue destination="yX7-Ya-AQQ" kind="show" identifier="segueToVideoInfo" id="nPg-cy-7uy"/>
+                        <segue destination="H5O-D4-2xc" kind="show" identifier="segueToVideoInfo" id="gzY-IK-dXH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="esz-Gw-ruy" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -783,7 +783,7 @@
         <!--Navigation Controller-->
         <scene sceneID="lld-Sx-ZZM">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="H5O-D4-2xc" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="H5O-D4-2xc" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Zsu-Ry-y4R">
@@ -863,7 +863,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="wpQ-bX-FwV"/>
-        <segue reference="nPg-cy-7uy"/>
-        <segue reference="BoZ-Vx-wI1"/>
+        <segue reference="eoP-mM-6CD"/>
     </inferredMetricsTieBreakers>
 </document>
