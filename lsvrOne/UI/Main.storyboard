@@ -128,8 +128,8 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="more_info" translatesAutoresizingMaskIntoConstraints="NO" id="pqR-bc-elS">
                                 <rect key="frame" x="-4" y="0.0" width="383" height="667"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mH7-uh-O9F">
-                                <rect key="frame" x="16" y="20" width="44" height="36"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mH7-uh-O9F">
+                                <rect key="frame" x="20" y="20" width="44" height="36"/>
                                 <state key="normal" image="close_icon"/>
                                 <connections>
                                     <action selector="backButtonPressed:" destination="j7T-pY-5oB" eventType="touchUpInside" id="0Wx-I4-nRg"/>
@@ -138,14 +138,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="mH7-uh-O9F" firstAttribute="top" secondItem="5TH-ue-qlL" secondAttribute="bottom" id="6KN-K5-Mte"/>
-                            <constraint firstItem="DG9-AX-rP7" firstAttribute="top" secondItem="mH7-uh-O9F" secondAttribute="bottom" constant="611" id="Bs8-A6-AId"/>
-                            <constraint firstItem="DG9-AX-rP7" firstAttribute="top" secondItem="pqR-bc-elS" secondAttribute="bottom" id="Gqp-sL-f3L"/>
-                            <constraint firstItem="pqR-bc-elS" firstAttribute="leading" secondItem="gWc-pT-RVn" secondAttribute="leadingMargin" constant="-20" id="KTE-Ja-gR7"/>
-                            <constraint firstItem="pqR-bc-elS" firstAttribute="top" secondItem="gWc-pT-RVn" secondAttribute="topMargin" id="RNN-1j-Jvr"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="pqR-bc-elS" secondAttribute="trailing" constant="-20" id="eUe-E9-cLy"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="mH7-uh-O9F" secondAttribute="trailing" constant="299" id="ghB-Wb-xsA"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="mH7-uh-O9F" secondAttribute="leading" id="jf2-3T-UZ4"/>
+                            <constraint firstItem="pqR-bc-elS" firstAttribute="top" secondItem="gWc-pT-RVn" secondAttribute="top" id="Gt1-eo-IL5"/>
+                            <constraint firstItem="pqR-bc-elS" firstAttribute="bottom" secondItem="DG9-AX-rP7" secondAttribute="top" id="VBZ-hX-itR"/>
+                            <constraint firstItem="pqR-bc-elS" firstAttribute="centerX" secondItem="gWc-pT-RVn" secondAttribute="centerX" id="jdp-76-bwO"/>
+                            <constraint firstItem="pqR-bc-elS" firstAttribute="leading" secondItem="gWc-pT-RVn" secondAttribute="leadingMargin" constant="-20" id="lgY-Fy-r4V"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Fdo-uO-24s">
