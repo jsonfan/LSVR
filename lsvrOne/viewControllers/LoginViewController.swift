@@ -17,6 +17,17 @@ class LoginViewController: UIViewController {
 
     var resultsDict: Dictionary<String, String> = [:]
     
+    //logout functionality
+    @IBAction func unwindToVC(segue: UIStoryboardSegue){
+        UserVariables.userName = nil
+        
+    //remove all files in documents directory
+        removeAllFilesFromDocumentsDirectory()
+
+        print("\(UserVariables.userName)")
+        print("logout successful, bitches be trippin")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -124,6 +135,23 @@ class LoginViewController: UIViewController {
 //        return [UIInterfaceOrientationMask.LandscapeLeft,UIInterfaceOrientationMask.LandscapeRight]
 //    }
 
+// removes all files from documents to handle device storage management, called at logout.
+    func removeAllFilesFromDocumentsDirectory(){
+        var error: NSError?
+        let path = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+        let fileManager = NSFileManager.defaultManager()
+        do {
+            let files = try fileManager.contentsOfDirectoryAtPath(path)
+            
+            for file in files {
+                print("file: \(file)")
+                let fullPath = path+"/"+file
+                try fileManager.removeItemAtPath(fullPath)
+            }
+        } catch {
+            print("\(error)")
+        }
 
+    }
 }
 

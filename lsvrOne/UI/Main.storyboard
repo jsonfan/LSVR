@@ -373,6 +373,7 @@
                                 <state key="normal" image="logout_button"/>
                                 <connections>
                                     <action selector="logoutButtonTapped:" destination="Ubt-82-7ys" eventType="touchUpInside" id="Xb4-gZ-OFP"/>
+                                    <segue destination="4yl-UV-yl7" kind="unwind" unwindAction="unwindToVC:" id="UmN-az-yuL"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NZ4-3A-7uM">
@@ -416,6 +417,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j1a-7V-1z5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="4yl-UV-yl7" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="890.5" y="1946.5"/>
         </scene>
