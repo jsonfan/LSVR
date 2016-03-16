@@ -169,7 +169,7 @@ class MonoscopicViewController: UIViewController, SCNSceneRendererDelegate, UIGe
         let path = NSURL(fileURLWithPath: dirPaths)
         print(path)
 
-        let fileURL = path.URLByAppendingPathComponent(videoFileURL+".mp4")
+        let fileURL = path.URLByAppendingPathComponent(videoFileURL)
 
         if (fileURL == fileURL){
             

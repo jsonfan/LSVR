@@ -187,7 +187,7 @@ class VideoInformationViewController: UIViewController {
         let fileManager = NSFileManager.defaultManager()
         if fileManager.fileExistsAtPath(filePath) {
             self.playButton.hidden = false
-            self.vidName = fileName
+            self.vidName = fileName+".mp4"
             print("file exists")
             return true
         }

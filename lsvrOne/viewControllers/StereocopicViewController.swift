@@ -152,7 +152,7 @@ class StereocopicViewController: UIViewController, SCNSceneRendererDelegate, UIG
         let path = NSURL(fileURLWithPath: dirPaths)
         print(path)
         
-        let fileURL = path.URLByAppendingPathComponent(videoFileURL+".mp4")
+        let fileURL = path.URLByAppendingPathComponent(videoFileURL)
         if (fileURL == fileURL){
             
             player = AVPlayer(URL: fileURL)
