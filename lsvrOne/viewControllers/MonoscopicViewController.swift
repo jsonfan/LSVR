@@ -50,8 +50,18 @@ class MonoscopicViewController: UIViewController, SCNSceneRendererDelegate, UIGe
     
     var progressObserver : AnyObject?
     
+//    override func viewDidAppear(animated: Bool) {
+//        let value = UIInterfaceOrientation.LandscapeLeft.rawValue
+//        UIDevice.currentDevice().setValue(value, forKey: "orientation")
+//    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        // detect double tap gesture
+        let tap = UITapGestureRecognizer(target: self, action: "doubleTapped")
+        tap.numberOfTapsRequired = 2
+        view.addGestureRecognizer(tap)
+        
 //        print(videoPath)
         leftSceneView?.backgroundColor = UIColor.blackColor()
         //        rightSceneView?.backgroundColor = UIColor.whiteColor()
@@ -159,7 +169,7 @@ class MonoscopicViewController: UIViewController, SCNSceneRendererDelegate, UIGe
         let path = NSURL(fileURLWithPath: dirPaths)
         print(path)
 
-        let fileURL = path.URLByAppendingPathComponent(videoFileURL)
+        let fileURL = path.URLByAppendingPathComponent(videoFileURL+".mp4")
 
         if (fileURL == fileURL){
             
@@ -214,6 +224,17 @@ class MonoscopicViewController: UIViewController, SCNSceneRendererDelegate, UIGe
     func tapTheScreen(){
         // Action when the screen is tapped
         stopPlay()
+//        let currentItem = player.currentItem
+//        var duration = currentItem!.asset.duration
+//        var currentTime = currentItem!.currentTime()
+//        
+//        if currentTime == duration {
+//            self.player.seekToTime(kCMTimeZero)
+//            play()
+//        }
+//        else {
+//            stopPlay()
+//        }
     }
 
     func panGesture(sender: UIPanGestureRecognizer){
@@ -307,6 +328,17 @@ class MonoscopicViewController: UIViewController, SCNSceneRendererDelegate, UIGe
             node.removeFromParentNode()
         }
     }
+    //add functionality to lock to landscape mode eventually.....lololol
+//    override func shouldAutorotate() -> Bool {
+//        return false
+//    }
+//    
+//    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+//        return [UIInterfaceOrientationMask.LandscapeLeft,UIInterfaceOrientationMask.LandscapeRight]
+//    }
     
-
+    func doubleTapped(){
+        print("DOUBLE TAPPED!")
+        dismissViewControllerAnimated(true, completion: nil)
+    }
 }

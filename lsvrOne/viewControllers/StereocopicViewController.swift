@@ -45,6 +45,10 @@ class StereocopicViewController: UIViewController, SCNSceneRendererDelegate, UIG
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//detect double tap
+        let tap = UITapGestureRecognizer(target: self, action: "doubleTapped")
+        tap.numberOfTapsRequired = 2
+        view.addGestureRecognizer(tap)
 //        print(videoPath)
         leftSceneView?.backgroundColor = UIColor.blackColor()
         rightSceneView?.backgroundColor = UIColor.whiteColor()
@@ -148,7 +152,7 @@ class StereocopicViewController: UIViewController, SCNSceneRendererDelegate, UIG
         let path = NSURL(fileURLWithPath: dirPaths)
         print(path)
         
-        let fileURL = path.URLByAppendingPathComponent(videoFileURL)
+        let fileURL = path.URLByAppendingPathComponent(videoFileURL+".mp4")
         if (fileURL == fileURL){
             
             player = AVPlayer(URL: fileURL)
@@ -279,4 +283,8 @@ class StereocopicViewController: UIViewController, SCNSceneRendererDelegate, UIG
         }
     }
     
+    func doubleTapped(){
+        print("DOUBLE TAPPED!")
+        dismissViewControllerAnimated(true, completion: nil)
+    }
 }

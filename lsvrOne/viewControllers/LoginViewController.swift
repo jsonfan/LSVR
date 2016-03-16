@@ -115,6 +115,15 @@ class LoginViewController: UIViewController {
         view.endEditing(true)
         super.touchesBegan(touches, withEvent: event)
     }
+    
+//    override func shouldAutorotate() -> Bool {
+//        return false
+//    }
+    
+//    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+//        return [UIInterfaceOrientationMask.LandscapeLeft,UIInterfaceOrientationMask.LandscapeRight]
+//    }
+
 
 }
 

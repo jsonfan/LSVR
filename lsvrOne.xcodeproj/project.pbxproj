@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		490872931C99D69D00D5D0CC /* WatchInstructionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490872921C99D69D00D5D0CC /* WatchInstructionsViewController.swift */; };
 		4969F5401C97210600E24D70 /* MoreInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4969F53F1C97210600E24D70 /* MoreInfoViewController.swift */; };
 		4969F5481C97349500E24D70 /* LogOutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4969F5471C97349500E24D70 /* LogOutViewController.swift */; };
 		4969F54A1C974EA000E24D70 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4969F5491C974EA000E24D70 /* Reachability.swift */; };
@@ -112,6 +113,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		490872921C99D69D00D5D0CC /* WatchInstructionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchInstructionsViewController.swift; sourceTree = "<group>"; };
 		4969F53F1C97210600E24D70 /* MoreInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreInfoViewController.swift; sourceTree = "<group>"; };
 		4969F5471C97349500E24D70 /* LogOutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogOutViewController.swift; sourceTree = "<group>"; };
 		4969F5491C974EA000E24D70 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
@@ -273,6 +275,7 @@
 				4969F53F1C97210600E24D70 /* MoreInfoViewController.swift */,
 				4969F5471C97349500E24D70 /* LogOutViewController.swift */,
 				4969F54B1C97562600E24D70 /* WifiWarningViewController.swift */,
+				490872921C99D69D00D5D0CC /* WatchInstructionsViewController.swift */,
 			);
 			path = viewControllers;
 			sourceTree = "<group>";
@@ -412,6 +415,7 @@
 				4969F54A1C974EA000E24D70 /* Reachability.swift in Sources */,
 				49E2C4D91C8E2F9A005FA591 /* LoginViewController.swift in Sources */,
 				49786CE31C8F65510012ADD7 /* StereocopicViewController.swift in Sources */,
+				490872931C99D69D00D5D0CC /* WatchInstructionsViewController.swift in Sources */,
 				49786CEB1C90BFE40012ADD7 /* ImageLoader.swift in Sources */,
 				4969F5481C97349500E24D70 /* LogOutViewController.swift in Sources */,
 				4969F54C1C97562600E24D70 /* WifiWarningViewController.swift in Sources */,

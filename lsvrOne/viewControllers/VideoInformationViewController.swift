@@ -183,7 +183,6 @@ class VideoInformationViewController: UIViewController {
     
     func checkIfFileExists (fileName: String)->Bool{
         let path = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
-        let url = NSURL(fileURLWithPath: path)
         let filePath = path+"/"+fileName+".mp4"
         let fileManager = NSFileManager.defaultManager()
         if fileManager.fileExistsAtPath(filePath) {
