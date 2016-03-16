@@ -21,6 +21,11 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        //placeholder color
+        userNameTextField.attributedPlaceholder = NSAttributedString(string: "Username", attributes:[NSForegroundColorAttributeName : UIColor.whiteColor()])
+        passwordTextField.attributedPlaceholder = NSAttributedString(string: "Password", attributes:[NSForegroundColorAttributeName: UIColor.whiteColor()])
+        
+        
         let reachability: Reachability
         do {
             reachability = try Reachability.reachabilityForInternetConnection()
