@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
-        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -201,49 +200,13 @@
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cJX-QG-Ql6">
                                                             <rect key="frame" x="0.0" y="0.0" width="335" height="185"/>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="360 Video" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xWD-Mm-hvC">
-                                                            <rect key="frame" x="247" y="8" width="80" height="91"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" constant="80" id="ICy-ln-CYZ"/>
-                                                            </constraints>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Video Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eHj-XW-WmE">
-                                                            <rect key="frame" x="8" y="8" width="82" height="21"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" constant="82" id="BN8-uL-vKa"/>
-                                                                <constraint firstAttribute="height" constant="21" id="Nir-SK-ehB"/>
-                                                            </constraints>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Video Desc" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2a5-KA-9Ih">
-                                                            <rect key="frame" x="8" y="86" width="88" height="91"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" constant="88" id="HZI-Wd-mGg"/>
-                                                            </constraints>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstItem="cJX-QG-Ql6" firstAttribute="leading" secondItem="pKe-zB-yCn" secondAttribute="leading" id="A8e-4v-PrY"/>
-                                                        <constraint firstAttribute="bottom" secondItem="xWD-Mm-hvC" secondAttribute="bottom" constant="86" id="B4g-Bb-PkX"/>
-                                                        <constraint firstItem="eHj-XW-WmE" firstAttribute="firstBaseline" secondItem="xWD-Mm-hvC" secondAttribute="firstBaseline" id="FUA-up-Pf0"/>
                                                         <constraint firstAttribute="trailing" secondItem="cJX-QG-Ql6" secondAttribute="trailing" id="I1Z-KD-7Z8"/>
-                                                        <constraint firstItem="eHj-XW-WmE" firstAttribute="top" secondItem="pKe-zB-yCn" secondAttribute="topMargin" id="Ivk-4L-ii3"/>
-                                                        <constraint firstItem="xWD-Mm-hvC" firstAttribute="trailing" secondItem="pKe-zB-yCn" secondAttribute="trailingMargin" id="OP2-L2-jUO"/>
                                                         <constraint firstItem="cJX-QG-Ql6" firstAttribute="top" secondItem="pKe-zB-yCn" secondAttribute="top" id="QZm-38-AoG"/>
-                                                        <constraint firstItem="2a5-KA-9Ih" firstAttribute="bottom" secondItem="pKe-zB-yCn" secondAttribute="bottomMargin" id="Tkk-Tb-xCA"/>
                                                         <constraint firstAttribute="bottom" secondItem="cJX-QG-Ql6" secondAttribute="bottom" id="idd-Jq-qrc"/>
-                                                        <constraint firstItem="2a5-KA-9Ih" firstAttribute="top" secondItem="eHj-XW-WmE" secondAttribute="bottom" constant="57" id="qZR-Uz-pek"/>
-                                                        <constraint firstItem="eHj-XW-WmE" firstAttribute="leading" secondItem="pKe-zB-yCn" secondAttribute="leadingMargin" id="upM-3q-BPl"/>
-                                                        <constraint firstItem="2a5-KA-9Ih" firstAttribute="leading" secondItem="eHj-XW-WmE" secondAttribute="leading" id="zwI-Ke-ef9"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -256,9 +219,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
-                                            <outlet property="videoDescription" destination="2a5-KA-9Ih" id="Ihp-0m-ICi"/>
                                             <outlet property="videoThumbNail" destination="cJX-QG-Ql6" id="HHL-lI-m8S"/>
-                                            <outlet property="videoTitle" destination="eHj-XW-WmE" id="T0C-fo-paL"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -951,6 +912,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="wpQ-bX-FwV"/>
-        <segue reference="cUa-wM-7mC"/>
+        <segue reference="eoP-mM-6CD"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -80,8 +80,8 @@ class DashboardViewController: UIViewController, UITableViewDelegate, UITableVie
         print("I LIKE TURTLES")
         let indexPath = tableView.indexPathForSelectedRow!
         let cell = tableView.cellForRowAtIndexPath(indexPath)! as! VideoTableCell
-        videoTitle = cell.videoTitle.text!
-        videoDesc = cell.videoDescription.text!
+//        videoTitle = cell.videoTitle.text!
+//        videoDesc = cell.videoDescription.text!
         videoPic = cell.videoThumbNail?.image!
         videoID = cell.videoIdentification
         videoFileName = cell.videoName
