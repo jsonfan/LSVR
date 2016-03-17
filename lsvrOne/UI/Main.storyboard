@@ -484,8 +484,8 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="header_background" translatesAutoresizingMaskIntoConstraints="NO" id="Ivu-WE-yQj">
                                 <rect key="frame" x="-4" y="0.0" width="383" height="64"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iTe-1u-ed6">
-                                <rect key="frame" x="16" y="7" width="40" height="36"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iTe-1u-ed6">
+                                <rect key="frame" x="16" y="14" width="40" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="qpR-x4-enc"/>
                                 </constraints>
@@ -494,11 +494,11 @@
                                     <action selector="backButtonTapped:" destination="ufX-KV-l13" eventType="touchUpInside" id="beS-DB-fch"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ls_logo" translatesAutoresizingMaskIntoConstraints="NO" id="Xdn-Hd-WZV">
-                                <rect key="frame" x="72" y="20" width="231" height="10"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="ls_logo" translatesAutoresizingMaskIntoConstraints="NO" id="Xdn-Hd-WZV">
+                                <rect key="frame" x="72" y="27" width="231" height="10"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wJK-v6-WWu">
-                                <rect key="frame" x="319" y="7" width="40" height="36"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wJK-v6-WWu">
+                                <rect key="frame" x="319" y="14" width="40" height="36"/>
                                 <state key="normal" image="logout_icon"/>
                                 <connections>
                                     <segue destination="MTg-6X-fKE" kind="presentation" identifier="segueToLogoutFromInstructions" id="cUa-wM-7mC"/>
@@ -511,9 +511,9 @@
                             <constraint firstItem="Ivu-WE-yQj" firstAttribute="top" secondItem="UxG-R2-kP2" secondAttribute="top" id="9b5-XS-20y"/>
                             <constraint firstItem="Xdn-Hd-WZV" firstAttribute="centerX" secondItem="Ivu-WE-yQj" secondAttribute="centerX" id="9wh-iR-KSt"/>
                             <constraint firstItem="jPj-Le-dNf" firstAttribute="top" secondItem="Ivu-WE-yQj" secondAttribute="bottom" constant="603" id="FcU-G5-g5f"/>
-                            <constraint firstItem="jPj-Le-dNf" firstAttribute="top" secondItem="iTe-1u-ed6" secondAttribute="bottom" constant="624" id="HRp-eI-huc"/>
+                            <constraint firstItem="jPj-Le-dNf" firstAttribute="top" secondItem="iTe-1u-ed6" secondAttribute="bottom" constant="617" id="HRp-eI-huc"/>
                             <constraint firstItem="I0M-iy-183" firstAttribute="bottom" secondItem="jPj-Le-dNf" secondAttribute="top" id="JQl-FA-upb"/>
-                            <constraint firstItem="wJK-v6-WWu" firstAttribute="trailing" secondItem="UxG-R2-kP2" secondAttribute="trailingMargin" id="KFL-sO-9d7"/>
+                            <constraint firstItem="wJK-v6-WWu" firstAttribute="trailing" secondItem="UxG-R2-kP2" secondAttribute="trailingMargin" constant="4" id="KFL-sO-9d7"/>
                             <constraint firstItem="Ivu-WE-yQj" firstAttribute="leading" secondItem="I0M-iy-183" secondAttribute="leading" id="NmH-UY-StN"/>
                             <constraint firstItem="Xdn-Hd-WZV" firstAttribute="centerX" secondItem="UxG-R2-kP2" secondAttribute="centerX" id="Q2k-6Q-3gZ"/>
                             <constraint firstItem="iTe-1u-ed6" firstAttribute="centerY" secondItem="Xdn-Hd-WZV" secondAttribute="centerY" id="VHb-yg-kG6"/>
@@ -521,7 +521,7 @@
                             <constraint firstItem="wJK-v6-WWu" firstAttribute="leading" secondItem="Xdn-Hd-WZV" secondAttribute="trailing" constant="16" id="Xnf-ad-O6f"/>
                             <constraint firstItem="wJK-v6-WWu" firstAttribute="top" secondItem="iTe-1u-ed6" secondAttribute="top" id="XyU-5B-DhZ"/>
                             <constraint firstItem="jPj-Le-dNf" firstAttribute="top" secondItem="Xdn-Hd-WZV" secondAttribute="bottom" constant="637" id="b0D-ER-3u0"/>
-                            <constraint firstItem="iTe-1u-ed6" firstAttribute="leading" secondItem="UxG-R2-kP2" secondAttribute="leadingMargin" id="bqR-95-4p5"/>
+                            <constraint firstItem="iTe-1u-ed6" firstAttribute="leading" secondItem="UxG-R2-kP2" secondAttribute="leadingMargin" constant="-4" id="bqR-95-4p5"/>
                             <constraint firstItem="I0M-iy-183" firstAttribute="trailing" secondItem="Ivu-WE-yQj" secondAttribute="trailing" id="cvQ-jN-0x3"/>
                             <constraint firstItem="Xdn-Hd-WZV" firstAttribute="leading" secondItem="iTe-1u-ed6" secondAttribute="trailing" constant="16" id="efD-VJ-64H"/>
                             <constraint firstItem="I0M-iy-183" firstAttribute="top" secondItem="Ivu-WE-yQj" secondAttribute="top" id="f2K-Jc-8d9"/>
@@ -911,7 +911,7 @@
         <image name="wifi_popup" width="250" height="444"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="cUa-wM-7mC"/>
         <segue reference="wpQ-bX-FwV"/>
-        <segue reference="eoP-mM-6CD"/>
     </inferredMetricsTieBreakers>
 </document>
