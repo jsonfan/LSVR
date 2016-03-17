@@ -23,6 +23,8 @@ func degreesToRadians(degrees: Float) -> Float {
 
 class MonoscopicViewController: UIViewController, SCNSceneRendererDelegate, UIGestureRecognizerDelegate {
 
+    @IBOutlet weak var pausedVidImage: UIImageView!
+    @IBOutlet weak var finishedVidImage: UIImageView!
     
     @IBOutlet weak var leftSceneView: SCNView!
     var videoFileURL: String!
@@ -50,6 +52,7 @@ class MonoscopicViewController: UIViewController, SCNSceneRendererDelegate, UIGe
     
     var progressObserver : AnyObject?
     
+    
   //restarts the video on tap at end.
     func restartVideoFromBeginning() {
         let seconds: Int64 = 0
@@ -59,13 +62,12 @@ class MonoscopicViewController: UIViewController, SCNSceneRendererDelegate, UIGe
         player.play()
     }
     
-//    override func viewDidAppear(animated: Bool) {
-//        let value = UIInterfaceOrientation.LandscapeLeft.rawValue
-//        UIDevice.currentDevice().setValue(value, forKey: "orientation")
-//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        pausedVidImage.hidden = true
+        finishedVidImage.hidden = true
+        
         // detect double tap gesture
         let tap = UITapGestureRecognizer(target: self, action: "doubleTapped")
         tap.numberOfTapsRequired = 2
@@ -172,8 +174,6 @@ class MonoscopicViewController: UIViewController, SCNSceneRendererDelegate, UIGe
     
     //Mark: video player methods
     func play(){
-        
-
         let dirPaths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
         let path = NSURL(fileURLWithPath: dirPaths)
         print(path)
@@ -214,7 +214,7 @@ class MonoscopicViewController: UIViewController, SCNSceneRendererDelegate, UIGe
 //                usingBlock: { [unowned self] (time) -> Void in
 //                    //self.updateSliderProgression()
 //                })
-//            NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerDidFinishPlaying:", name: AVPlayerItemDidPlayToEndTimeNotification, object: player.currentItem)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerDidFinishPlaying:", name: AVPlayerItemDidPlayToEndTimeNotification, object: player.currentItem)
         }
     }
 
@@ -223,16 +223,17 @@ class MonoscopicViewController: UIViewController, SCNSceneRendererDelegate, UIGe
     //function for end popup
     func playerDidFinishPlaying(note: NSNotification) {
         print("finished playing the video")
-        let alertController = UIAlertController(title: "finished playing", message: "tap to replay, double tap to exit", preferredStyle: .Alert)
-        alertController.addAction(UIAlertAction(title: "dismiss", style: .Default, handler: nil))
-        self.presentViewController(alertController, animated: true, completion: nil)
+        finishedVidImage.hidden = false
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
     }
     
     func stopPlay(){
         
         if (playingVideo){
+            pausedVidImage.hidden = false
             videoSpriteKitNode!.pause()
         }else{
+            pausedVidImage.hidden = true
             videoSpriteKitNode!.play()
         }
         
@@ -247,6 +248,7 @@ class MonoscopicViewController: UIViewController, SCNSceneRendererDelegate, UIGe
         let duration = Float(CMTimeGetSeconds(playerDuration))
         let time = Float(CMTimeGetSeconds(player.currentTime()))
         if time >= duration {
+            finishedVidImage.hidden = true
             restartVideoFromBeginning()
         }
         else {
@@ -335,6 +337,7 @@ class MonoscopicViewController: UIViewController, SCNSceneRendererDelegate, UIGe
         for node in scene!.rootNode.childNodes {
             removeNode(node)
         }
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     func removeNode(node : SCNNode) {

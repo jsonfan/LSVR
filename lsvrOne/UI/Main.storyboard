@@ -644,17 +644,31 @@
                             <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="obD-OB-tbc">
                                 <rect key="frame" x="-4" y="0.0" width="192" height="667"/>
                             </sceneKitView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vidpaused" translatesAutoresizingMaskIntoConstraints="NO" id="rNw-h8-YHf">
+                                <rect key="frame" x="-4" y="0.0" width="383" height="667"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vidfinished" translatesAutoresizingMaskIntoConstraints="NO" id="joh-bN-qEe">
+                                <rect key="frame" x="-4" y="0.0" width="383" height="667"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="joh-bN-qEe" firstAttribute="leading" secondItem="Jf7-oq-e4M" secondAttribute="leadingMargin" constant="-20" id="9qs-dr-W0X"/>
+                            <constraint firstItem="joh-bN-qEe" firstAttribute="top" secondItem="Jf7-oq-e4M" secondAttribute="topMargin" id="Atz-Eq-izx"/>
                             <constraint firstItem="a1n-Sp-PvX" firstAttribute="top" secondItem="obD-OB-tbc" secondAttribute="top" id="DcJ-0l-6E2"/>
                             <constraint firstAttribute="trailingMargin" secondItem="a1n-Sp-PvX" secondAttribute="trailing" constant="-19.5" id="FYj-12-jew"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="rNw-h8-YHf" secondAttribute="trailing" constant="-20" id="G4e-nl-MY8"/>
+                            <constraint firstItem="S7o-gV-Lc7" firstAttribute="top" secondItem="rNw-h8-YHf" secondAttribute="bottom" id="Gpe-HR-eZ7"/>
                             <constraint firstItem="obD-OB-tbc" firstAttribute="leading" secondItem="Jf7-oq-e4M" secondAttribute="leadingMargin" constant="-20" id="Jkt-7H-xow"/>
                             <constraint firstItem="a1n-Sp-PvX" firstAttribute="leading" secondItem="obD-OB-tbc" secondAttribute="trailing" constant="-0.5" id="Lfu-B7-xZE"/>
+                            <constraint firstItem="S7o-gV-Lc7" firstAttribute="top" secondItem="joh-bN-qEe" secondAttribute="bottom" id="MFK-fj-uPJ"/>
                             <constraint firstItem="S7o-gV-Lc7" firstAttribute="top" secondItem="obD-OB-tbc" secondAttribute="bottom" id="WOu-CR-52a"/>
+                            <constraint firstItem="rNw-h8-YHf" firstAttribute="leading" secondItem="Jf7-oq-e4M" secondAttribute="leadingMargin" constant="-20" id="eMk-Kg-SP4"/>
                             <constraint firstItem="S7o-gV-Lc7" firstAttribute="top" secondItem="a1n-Sp-PvX" secondAttribute="bottom" id="ez3-cN-yzN"/>
                             <constraint firstItem="a1n-Sp-PvX" firstAttribute="width" secondItem="obD-OB-tbc" secondAttribute="width" id="l6U-4Q-QIc"/>
                             <constraint firstItem="obD-OB-tbc" firstAttribute="top" secondItem="0hm-CW-LmV" secondAttribute="bottom" constant="-20" id="pYn-to-Quy"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="joh-bN-qEe" secondAttribute="trailing" constant="-20" id="rki-s8-cRi"/>
+                            <constraint firstItem="rNw-h8-YHf" firstAttribute="top" secondItem="Jf7-oq-e4M" secondAttribute="topMargin" id="vFP-r1-oFo"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="0OT-ZD-YYr"/>
@@ -663,6 +677,8 @@
                     <connections>
                         <outlet property="leftSceneView" destination="obD-OB-tbc" id="SgE-rZ-Xdf"/>
                         <outlet property="rightSceneView" destination="a1n-Sp-PvX" id="GH0-4g-bTj"/>
+                        <outlet property="vidFinishedImage" destination="joh-bN-qEe" id="xgs-Mx-9xf"/>
+                        <outlet property="vidPausedImage" destination="rNw-h8-YHf" id="WcV-CX-KN2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j1N-qc-1pc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -684,19 +700,35 @@
                             <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" sceneName="" translatesAutoresizingMaskIntoConstraints="NO" id="mod-vi-jh7">
                                 <rect key="frame" x="-4" y="0.0" width="383" height="667"/>
                             </sceneKitView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vidpaused" translatesAutoresizingMaskIntoConstraints="NO" id="xxp-2R-87F">
+                                <rect key="frame" x="-4" y="0.0" width="383" height="667"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vidfinished" translatesAutoresizingMaskIntoConstraints="NO" id="RnM-ho-6H8">
+                                <rect key="frame" x="-4" y="0.0" width="383" height="667"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="mod-vi-jh7" firstAttribute="top" secondItem="OXK-8K-4KY" secondAttribute="topMargin" id="1XK-XE-7DV"/>
+                            <constraint firstItem="RnM-ho-6H8" firstAttribute="top" secondItem="OXK-8K-4KY" secondAttribute="topMargin" id="4ct-Ib-bfJ"/>
+                            <constraint firstItem="xxp-2R-87F" firstAttribute="top" secondItem="OXK-8K-4KY" secondAttribute="topMargin" id="4td-RX-E2D"/>
                             <constraint firstItem="ADM-nA-xtw" firstAttribute="top" secondItem="mod-vi-jh7" secondAttribute="bottom" id="9oG-w9-buL"/>
                             <constraint firstItem="mod-vi-jh7" firstAttribute="leading" secondItem="OXK-8K-4KY" secondAttribute="leadingMargin" constant="-20" id="Olb-hL-PbU"/>
                             <constraint firstAttribute="trailingMargin" secondItem="mod-vi-jh7" secondAttribute="trailing" constant="-20" id="Qpg-jw-7x6"/>
+                            <constraint firstItem="RnM-ho-6H8" firstAttribute="leading" secondItem="OXK-8K-4KY" secondAttribute="leadingMargin" constant="-20" id="TbK-vh-qVr"/>
+                            <constraint firstItem="ADM-nA-xtw" firstAttribute="top" secondItem="RnM-ho-6H8" secondAttribute="bottom" id="drt-4N-qYm"/>
+                            <constraint firstItem="ADM-nA-xtw" firstAttribute="top" secondItem="xxp-2R-87F" secondAttribute="bottom" id="ghM-8d-ARJ"/>
+                            <constraint firstItem="xxp-2R-87F" firstAttribute="leading" secondItem="OXK-8K-4KY" secondAttribute="leadingMargin" constant="-20" id="hCB-Lu-S4n"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="RnM-ho-6H8" secondAttribute="trailing" constant="-20" id="u1g-yw-C6E"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="xxp-2R-87F" secondAttribute="trailing" constant="-20" id="yOs-XW-a6a"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="7a8-zn-QxI"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="finishedVidImage" destination="RnM-ho-6H8" id="o8S-3T-IHZ"/>
                         <outlet property="leftSceneView" destination="mod-vi-jh7" id="lUR-TC-dG0"/>
+                        <outlet property="pausedVidImage" destination="xxp-2R-87F" id="41W-ZL-3fV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KaZ-x3-S6w" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -992,6 +1024,8 @@
         <image name="progress_complete_button" width="218" height="46"/>
         <image name="sign_in_button" width="250" height="40"/>
         <image name="username_icon" width="13" height="12"/>
+        <image name="vidfinished" width="250" height="444"/>
+        <image name="vidpaused" width="250" height="444"/>
         <image name="wifi_popup" width="250" height="444"/>
     </resources>
     <inferredMetricsTieBreakers>

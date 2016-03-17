@@ -17,6 +17,9 @@ import CoreGraphics
 
 class StereocopicViewController: UIViewController, SCNSceneRendererDelegate, UIGestureRecognizerDelegate {
 
+    @IBOutlet weak var vidFinishedImage: UIImageView!
+    @IBOutlet weak var vidPausedImage: UIImageView!
+    
     @IBOutlet weak var rightSceneView: SCNView!
     @IBOutlet weak var leftSceneView: SCNView!
     var videoFileURL: String!
@@ -54,6 +57,9 @@ class StereocopicViewController: UIViewController, SCNSceneRendererDelegate, UIG
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        vidFinishedImage.hidden = true
+        vidPausedImage.hidden = true
 //detect double tap
         let tap = UITapGestureRecognizer(target: self, action: "doubleTapped")
         tap.numberOfTapsRequired = 2
@@ -198,14 +204,24 @@ class StereocopicViewController: UIViewController, SCNSceneRendererDelegate, UIG
 //                })
 //            
 //            playPausePlayer()
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerDidFinishPlaying:", name: AVPlayerItemDidPlayToEndTimeNotification, object: player.currentItem)
         }
+    }
+    
+    //function for end popup
+    func playerDidFinishPlaying(note: NSNotification) {
+        print("finished playing the video")
+        vidFinishedImage.hidden = false
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
     }
     
     func stopPlay(){
         
         if (playingVideo){
+            vidPausedImage.hidden = false
             videoSpriteKitNode!.pause()
         }else{
+            vidPausedImage.hidden = true
             videoSpriteKitNode!.play()
         }
         
@@ -220,6 +236,7 @@ class StereocopicViewController: UIViewController, SCNSceneRendererDelegate, UIG
         let duration = Float(CMTimeGetSeconds(playerDuration))
         let time = Float(CMTimeGetSeconds(player.currentTime()))
         if time >= duration {
+            vidFinishedImage.hidden = true
             restartVideoFromBeginning()
         }
         else {
