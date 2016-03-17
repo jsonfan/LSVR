@@ -43,6 +43,15 @@ class StereocopicViewController: UIViewController, SCNSceneRendererDelegate, UIG
     
     var progressObserver : AnyObject?
     
+    //restarts video on tap at end of playing.
+    func restartVideoFromBeginning() {
+        let seconds: Int64 = 0
+        let preferredTimeScale: Int32 = 1
+        let seekTime : CMTime = CMTimeMake(seconds, preferredTimeScale)
+        player.seekToTime(seekTime)
+        player.play()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 //detect double tap
@@ -206,7 +215,17 @@ class StereocopicViewController: UIViewController, SCNSceneRendererDelegate, UIG
     //Mark: action methods
     func tapTheScreen(){
         // Action when the screen is tapped
-        stopPlay()
+        //        stopPlay()
+        let playerDuration = self.playerItemDuration()
+        let duration = Float(CMTimeGetSeconds(playerDuration))
+        let time = Float(CMTimeGetSeconds(player.currentTime()))
+        if time >= duration {
+            restartVideoFromBeginning()
+        }
+        else {
+            print(time, duration)
+            stopPlay()
+        }
     }
     
     func panGesture(sender: UIPanGestureRecognizer){

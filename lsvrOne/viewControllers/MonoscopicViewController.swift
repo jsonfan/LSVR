@@ -50,6 +50,15 @@ class MonoscopicViewController: UIViewController, SCNSceneRendererDelegate, UIGe
     
     var progressObserver : AnyObject?
     
+  //restarts the video on tap at end.
+    func restartVideoFromBeginning() {
+        let seconds: Int64 = 0
+        let preferredTimeScale: Int32 = 1
+        let seekTime : CMTime = CMTimeMake(seconds, preferredTimeScale)
+        player.seekToTime(seekTime)
+        player.play()
+    }
+    
 //    override func viewDidAppear(animated: Bool) {
 //        let value = UIInterfaceOrientation.LandscapeLeft.rawValue
 //        UIDevice.currentDevice().setValue(value, forKey: "orientation")
@@ -205,8 +214,18 @@ class MonoscopicViewController: UIViewController, SCNSceneRendererDelegate, UIGe
 //                usingBlock: { [unowned self] (time) -> Void in
 //                    //self.updateSliderProgression()
 //                })
-            
+//            NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerDidFinishPlaying:", name: AVPlayerItemDidPlayToEndTimeNotification, object: player.currentItem)
         }
+    }
+
+    
+    
+    //function for end popup
+    func playerDidFinishPlaying(note: NSNotification) {
+        print("finished playing the video")
+        let alertController = UIAlertController(title: "finished playing", message: "tap to replay, double tap to exit", preferredStyle: .Alert)
+        alertController.addAction(UIAlertAction(title: "dismiss", style: .Default, handler: nil))
+        self.presentViewController(alertController, animated: true, completion: nil)
     }
     
     func stopPlay(){
@@ -223,18 +242,17 @@ class MonoscopicViewController: UIViewController, SCNSceneRendererDelegate, UIGe
     //Mark: action methods
     func tapTheScreen(){
         // Action when the screen is tapped
-        stopPlay()
-//        let currentItem = player.currentItem
-//        var duration = currentItem!.asset.duration
-//        var currentTime = currentItem!.currentTime()
-//        
-//        if currentTime == duration {
-//            self.player.seekToTime(kCMTimeZero)
-//            play()
-//        }
-//        else {
-//            stopPlay()
-//        }
+//        stopPlay()
+        let playerDuration = self.playerItemDuration()
+        let duration = Float(CMTimeGetSeconds(playerDuration))
+        let time = Float(CMTimeGetSeconds(player.currentTime()))
+        if time >= duration {
+            restartVideoFromBeginning()
+        }
+        else {
+            print(time, duration)
+            stopPlay()
+        }
     }
 
     func panGesture(sender: UIPanGestureRecognizer){
