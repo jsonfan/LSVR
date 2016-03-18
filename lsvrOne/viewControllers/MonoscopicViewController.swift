@@ -25,6 +25,7 @@ class MonoscopicViewController: UIViewController, SCNSceneRendererDelegate, UIGe
 
     @IBOutlet weak var pausedVidImage: UIImageView!
     @IBOutlet weak var finishedVidImage: UIImageView!
+//    @IBOutlet weak var button_background: UIImageView!
     
     @IBOutlet weak var leftSceneView: SCNView!
     var videoFileURL: String!
@@ -46,6 +47,7 @@ class MonoscopicViewController: UIViewController, SCNSceneRendererDelegate, UIGe
     var motionManager : CMMotionManager?
     
     var playingVideo : Bool = false
+    var videoDidFinish: Bool = false
     
     var currentAngleX : Float?
     var currentAngleY : Float?
@@ -55,6 +57,9 @@ class MonoscopicViewController: UIViewController, SCNSceneRendererDelegate, UIGe
     
   //restarts the video on tap at end.
     func restartVideoFromBeginning() {
+        print(finishedVidImage.hidden)
+        finishedVidImage.hidden = true
+        print("set" + "\(finishedVidImage.hidden)")
         let seconds: Int64 = 0
         let preferredTimeScale: Int32 = 1
         let seekTime : CMTime = CMTimeMake(seconds, preferredTimeScale)
@@ -67,6 +72,8 @@ class MonoscopicViewController: UIViewController, SCNSceneRendererDelegate, UIGe
         super.viewDidLoad()
         pausedVidImage.hidden = true
         finishedVidImage.hidden = true
+//        player.addObserver(self, forKeyPath: "videoDidFinishPlaying", options: NSKeyValueObservingOptions(), context: nil)
+//        button_background.hidden = true
         
         // detect double tap gesture
         let tap = UITapGestureRecognizer(target: self, action: "doubleTapped")
@@ -148,6 +155,13 @@ class MonoscopicViewController: UIViewController, SCNSceneRendererDelegate, UIGe
 
     }
     
+    //observer function
+//    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+//        if keyPath == "videoDidFinishPlaying" {
+//            NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerDidFinishPlaying:", name: AVPlayerItemDidPlayToEndTimeNotification, object: player.currentItem)
+//        }
+//    }
+    
     
     //MARK: Camera Orientation methods
     override func willAnimateRotationToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
@@ -214,26 +228,34 @@ class MonoscopicViewController: UIViewController, SCNSceneRendererDelegate, UIGe
 //                usingBlock: { [unowned self] (time) -> Void in
 //                    //self.updateSliderProgression()
 //                })
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerDidFinishPlaying:", name: AVPlayerItemDidPlayToEndTimeNotification, object: player.currentItem)
+                print("added observer")
+//                NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerDidFinishPlaying:", name: AVPlayerItemDidPlayToEndTimeNotification, object: player.currentItem)
         }
     }
 
     
     
     //function for end popup
-    func playerDidFinishPlaying(note: NSNotification) {
+    func playerDidFinishPlaying(note: NSNotification){
         print("finished playing the video")
+        print("image:"+"\(finishedVidImage.hidden)")
         finishedVidImage.hidden = false
+        print("image:"+"\(finishedVidImage.hidden)")
+        videoDidFinish = true
+//        button_background.hidden = false
         NSNotificationCenter.defaultCenter().removeObserver(self, name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
+
     }
     
     func stopPlay(){
         
         if (playingVideo){
             pausedVidImage.hidden = false
+//            button_background.hidden = false
             videoSpriteKitNode!.pause()
         }else{
             pausedVidImage.hidden = true
+//            button_background.hidden = true
             videoSpriteKitNode!.play()
         }
         
@@ -248,7 +270,10 @@ class MonoscopicViewController: UIViewController, SCNSceneRendererDelegate, UIGe
         let duration = Float(CMTimeGetSeconds(playerDuration))
         let time = Float(CMTimeGetSeconds(player.currentTime()))
         if time >= duration {
+            videoDidFinish = false
+            print("image:"+"\(finishedVidImage.hidden)")
             finishedVidImage.hidden = true
+            print("image:"+"\(finishedVidImage.hidden)")
             restartVideoFromBeginning()
         }
         else {
@@ -362,4 +387,5 @@ class MonoscopicViewController: UIViewController, SCNSceneRendererDelegate, UIGe
         print("DOUBLE TAPPED!")
         dismissViewControllerAnimated(true, completion: nil)
     }
+    
 }

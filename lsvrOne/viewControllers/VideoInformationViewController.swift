@@ -50,6 +50,8 @@ class VideoInformationViewController: UIViewController {
 //            self.vidName = vidFileName
 //            print("file exists")
 //        }
+
+//        UINavigationBar.appearance().setBackgroundImage(UIImage(named: "ls_logo"), forBarMetrics: .Default)
         checkIfFileExists(vidFileName)
         // Do any additional setup after loading the view.
         videoThumbnail.image = thumbNail
@@ -60,6 +62,14 @@ class VideoInformationViewController: UIViewController {
         downloadProgress.setProgress(0.0, animated: false)
         downloadProgress.hidden = true
         
+        var nav = self.navigationController?.navigationBar
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        imageView.contentMode = .ScaleAspectFit
+        let image = UIImage(named: "ls_logo")
+        imageView.image = image
+        navigationItem.titleView = imageView
+        self.navigationController?.navigationBar.translucent = true
+        self.navigationController?.view.backgroundColor = UIColor.clearColor()
         //hide play button
         
         //check if file exists

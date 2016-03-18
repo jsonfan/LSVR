@@ -66,7 +66,7 @@ class DashboardViewController: UIViewController, UITableViewDelegate, UITableVie
         let thumbnailKey = video["thumbnailKey"] as! String
         let thumbnailURL = "https://s3.amazonaws.com/"+thumbnailBucket+"/"+thumbnailKey
         cell.videoTitle?.text = video["name"] as! String
-        cell.videoDescription?.text = video["description"] as! String
+        cell.videoDesc = video["description"] as! String
         cell.videoIdentification = video["_id"] as! String
         cell.videoName = video["key"] as! String
         ImageLoader.sharedLoader.imageForUrl(thumbnailURL, completionHandler: {(image: UIImage?, url: String) in
@@ -80,8 +80,8 @@ class DashboardViewController: UIViewController, UITableViewDelegate, UITableVie
         print("I LIKE TURTLES")
         let indexPath = tableView.indexPathForSelectedRow!
         let cell = tableView.cellForRowAtIndexPath(indexPath)! as! VideoTableCell
-        videoTitle = cell.videoTitle.text!
-        videoDesc = cell.videoDescription.text!
+//        videoTitle = cell.videoTitle.text!
+        videoDesc = cell.videoDesc
         videoPic = cell.videoThumbNail?.image!
         videoID = cell.videoIdentification
         videoFileName = cell.videoName
