@@ -17,6 +17,7 @@ import CoreGraphics
 
 class VideoDetailViewController: UIViewController {
 
+    @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var navBarItem: UINavigationItem!
     var vidName: String!
     var videoFormatFlag: Int!
@@ -47,6 +48,12 @@ class VideoDetailViewController: UIViewController {
         let image = UIImage(named: "ls_logo")
         imageView.image = image
         navBarItem.titleView = imageView
+        //adjust alpha for transparency
+        navBar.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.5)
+        
+        navBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+        navBar.shadowImage = UIImage()
+        navBar.translucent = true
         self.navigationController?.navigationBar.translucent = true
         self.navigationController?.view.backgroundColor = UIColor.clearColor()
 

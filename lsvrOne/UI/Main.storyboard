@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -267,6 +267,7 @@
                     <navigationItem key="navigationItem" title="Light Sail VR" id="Z9c-qT-zoR"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="navBar" destination="3gZ-aC-fnu" id="qtd-wf-Adw"/>
                         <outlet property="navBarItem" destination="OaJ-ag-ER3" id="0AQ-ho-mqc"/>
                         <outlet property="tableView" destination="hZh-dv-3Ie" id="ZIS-CV-Xjp"/>
                         <segue destination="H5O-D4-2xc" kind="show" identifier="segueToVideoInfo" id="gzY-IK-dXH"/>
@@ -445,6 +446,7 @@
                     <navigationItem key="navigationItem" id="Ygk-Kv-TMN"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="navBar" destination="C8F-Fx-PQg" id="y9w-gV-5rP"/>
                         <outlet property="navBarItem" destination="68X-l2-qxJ" id="nRZ-yM-caI"/>
                         <segue destination="ufX-KV-l13" kind="presentation" identifier="segueToWatchInstructions" id="4mr-MQ-ae6"/>
                     </connections>
@@ -505,6 +507,7 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="navBar" destination="hD6-Jo-bcd" id="mHv-Cg-vM4"/>
                         <outlet property="navBarItem" destination="q4i-in-ZCA" id="6Bh-s1-kUi"/>
                         <segue destination="EZv-1v-1QA" kind="presentation" identifier="stereoSegue" id="Wvu-Ai-nQd"/>
                         <segue destination="yjn-q6-2SG" kind="presentation" identifier="monoSegue" id="elQ-tQ-BMs"/>
@@ -526,11 +529,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a1n-Sp-PvX">
-                                <rect key="frame" x="187" y="0.0" width="192" height="667"/>
-                            </sceneKitView>
                             <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="obD-OB-tbc">
                                 <rect key="frame" x="-4" y="0.0" width="192" height="667"/>
+                            </sceneKitView>
+                            <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a1n-Sp-PvX">
+                                <rect key="frame" x="187" y="0.0" width="192" height="667"/>
                             </sceneKitView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vidpaused" translatesAutoresizingMaskIntoConstraints="NO" id="rNw-h8-YHf">
                                 <rect key="frame" x="-4" y="0.0" width="383" height="667"/>
@@ -881,6 +884,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="wpQ-bX-FwV"/>
-        <segue reference="tdz-Dg-ivX"/>
+        <segue reference="uLd-cJ-GIA"/>
     </inferredMetricsTieBreakers>
 </document>

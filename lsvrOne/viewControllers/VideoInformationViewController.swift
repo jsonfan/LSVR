@@ -72,8 +72,11 @@ class VideoInformationViewController: UIViewController {
         let image = UIImage(named: "ls_logo")
         imageView.image = image
         navigationItem.titleView = imageView
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+        //adjust alpha for transparency
+        self.navigationController?.navigationBar.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.5)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.translucent = true
-        self.navigationController?.view.backgroundColor = UIColor.clearColor()
         //hide play button
         
         //check if file exists

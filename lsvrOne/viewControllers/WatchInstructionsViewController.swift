@@ -10,6 +10,7 @@ import UIKit
 
 class WatchInstructionsViewController: UIViewController {
 
+    @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var navBarItem: UINavigationItem!
     var vidName: String!
     var videoFormatIndicator: Int!
@@ -34,13 +35,17 @@ class WatchInstructionsViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        // SET NAV IMAGE TO LOGO
-        //        var nav = self.navigationController?.navigationBar
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
         imageView.contentMode = .ScaleAspectFit
         let image = UIImage(named: "ls_logo")
         imageView.image = image
         navBarItem.titleView = imageView
+        //adjust alpha for transparency
+        navBar.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.5)
+        
+        navBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+        navBar.shadowImage = UIImage()
+        navBar.translucent = true
         self.navigationController?.navigationBar.translucent = true
         self.navigationController?.view.backgroundColor = UIColor.clearColor()
     }
