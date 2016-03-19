@@ -272,10 +272,12 @@ class StereocopicViewController: UIViewController, SCNSceneRendererDelegate, UIG
         
         //        print(videoPath)
         leftSceneView?.backgroundColor = UIColor.blackColor()
+        rightSceneView?.backgroundColor = UIColor.whiteColor()
         
         // Create Scene
         scene = SCNScene()
         leftSceneView?.scene = scene
+        rightSceneView?.scene = scene
         
         // Create cameras
         let camX = 0.0 as Float
@@ -284,17 +286,23 @@ class StereocopicViewController: UIViewController, SCNSceneRendererDelegate, UIG
         let zFar = 50.0
         
         let leftCamera = SCNCamera()
+        let rightCamera = SCNCamera()
         
         leftCamera.zFar = zFar
+        rightCamera.zFar = zFar
         
         let leftCameraNode = SCNNode()
         leftCameraNode.camera = leftCamera
         leftCameraNode.position = SCNVector3(x: camX - 0.5, y: camY, z: camZ)
         
+        let rightCameraNode = SCNNode()
+        rightCameraNode.camera = rightCamera
+        rightCameraNode.position = SCNVector3(x: camX - 0.5, y: camY, z: camZ)
         
         camerasNode = SCNNode()
         camerasNode!.position = SCNVector3(x: camX, y:camY, z:camZ)
         camerasNode!.addChildNode(leftCameraNode)
+        camerasNode!.addChildNode(rightCameraNode)
         
         let camerasNodeAngles = getCamerasNodeAngle()
         camerasNode!.eulerAngles = SCNVector3Make(Float(camerasNodeAngles[0]), Float(camerasNodeAngles[1]), Float(camerasNodeAngles[2]))
@@ -311,7 +319,7 @@ class StereocopicViewController: UIViewController, SCNSceneRendererDelegate, UIG
         scene!.rootNode.addChildNode(cameraYawNode!)
         
         leftSceneView?.pointOfView = leftCameraNode
-        //        rightSceneView?.pointOfView = rightCameraNode
+        rightSceneView?.pointOfView = rightCameraNode
         
         // Respond to user head movement. Refreshes the position of the camera 60 times per second.
         motionManager = CMMotionManager()
@@ -321,7 +329,7 @@ class StereocopicViewController: UIViewController, SCNSceneRendererDelegate, UIG
         leftSceneView?.delegate = self
         
         leftSceneView?.playing = true
-        //        rightSceneView?.playing = true
+        rightSceneView?.playing = true
         
         // Add gestures on screen
         recognizer = UITapGestureRecognizer(target: self, action:Selector("tapTheScreen"))
