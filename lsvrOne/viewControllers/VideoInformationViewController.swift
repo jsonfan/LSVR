@@ -19,6 +19,10 @@ class VideoInformationViewController: UIViewController {
     @IBOutlet weak var downloadButton: UIButton!
     @IBOutlet weak var playButton: UIButton!
     
+    @IBAction func navBackButtonTapped(sender: UIBarButtonItem) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     @IBAction func playButtonTapped(sender: UIButton) {
     }
     @IBAction func backButtonTapped(sender: UIButton) {

@@ -10,9 +10,13 @@ import UIKit
 
 class WatchInstructionsViewController: UIViewController {
 
+    @IBOutlet weak var navBarItem: UINavigationItem!
     var vidName: String!
     var videoFormatIndicator: Int!
     
+    @IBAction func navBarBackButtonTapped(sender: UIBarButtonItem) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
     @IBAction func backButtonTapped(sender: UIButton) {
         dismissViewControllerAnimated(true, completion: nil)
     }
@@ -30,6 +34,15 @@ class WatchInstructionsViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        // SET NAV IMAGE TO LOGO
+        //        var nav = self.navigationController?.navigationBar
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        imageView.contentMode = .ScaleAspectFit
+        let image = UIImage(named: "ls_logo")
+        imageView.image = image
+        navBarItem.titleView = imageView
+        self.navigationController?.navigationBar.translucent = true
+        self.navigationController?.view.backgroundColor = UIColor.clearColor()
     }
 
     override func didReceiveMemoryWarning() {
