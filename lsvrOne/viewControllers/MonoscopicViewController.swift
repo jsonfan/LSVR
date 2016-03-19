@@ -57,110 +57,34 @@ class MonoscopicViewController: UIViewController, SCNSceneRendererDelegate, UIGe
     
   //restarts the video on tap at end.
     func restartVideoFromBeginning() {
-        print(finishedVidImage.hidden)
+        let dirPaths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+        let path = NSURL(fileURLWithPath: dirPaths)
+        print(path)
+        let fileURL = path.URLByAppendingPathComponent(videoFileURL)
+//        print(finishedVidImage.hidden)
         finishedVidImage.hidden = true
         print("set" + "\(finishedVidImage.hidden)")
         let seconds: Int64 = 0
         let preferredTimeScale: Int32 = 1
         let seekTime : CMTime = CMTimeMake(seconds, preferredTimeScale)
         player.seekToTime(seekTime)
+        print("GO GRAB MY BELT")
+        player = AVPlayer(URL: fileURL)
         player.play()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerDidFinishPlaying:", name: AVPlayerItemDidPlayToEndTimeNotification, object: player.currentItem)
+
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        pausedVidImage.hidden = true
-        finishedVidImage.hidden = true
-//        player.addObserver(self, forKeyPath: "videoDidFinishPlaying", options: NSKeyValueObservingOptions(), context: nil)
-//        button_background.hidden = true
         
-        // detect double tap gesture
-        let tap = UITapGestureRecognizer(target: self, action: "doubleTapped")
-        tap.numberOfTapsRequired = 2
-        view.addGestureRecognizer(tap)
-        
-//        print(videoPath)
-        leftSceneView?.backgroundColor = UIColor.blackColor()
-        //        rightSceneView?.backgroundColor = UIColor.whiteColor()
-        
-        // Create Scene
-        scene = SCNScene()
-        leftSceneView?.scene = scene
-        //        rightSceneView?.scene = scene
-        
-        // Create cameras
-        let camX = 0.0 as Float
-        let camY = 0.0 as Float
-        let camZ = 0.0 as Float
-        let zFar = 50.0
-        
-        let leftCamera = SCNCamera()
-        //        let rightCamera = SCNCamera()
-        
-        leftCamera.zFar = zFar
-        //        rightCamera.zFar = zFar
-        
-        let leftCameraNode = SCNNode()
-        leftCameraNode.camera = leftCamera
-        leftCameraNode.position = SCNVector3(x: camX - 0.5, y: camY, z: camZ)
-        
-        //        let rightCameraNode = SCNNode()
-        //        rightCameraNode.camera = rightCamera
-        //        rightCameraNode.position = SCNVector3(x: camX + 0.5, y: camY, z: camZ)
-        
-        camerasNode = SCNNode()
-        camerasNode!.position = SCNVector3(x: camX, y:camY, z:camZ)
-        camerasNode!.addChildNode(leftCameraNode)
-        //        camerasNode!.addChildNode(rightCameraNode)
-        
-        let camerasNodeAngles = getCamerasNodeAngle()
-        camerasNode!.eulerAngles = SCNVector3Make(Float(camerasNodeAngles[0]), Float(camerasNodeAngles[1]), Float(camerasNodeAngles[2]))
-        
-        cameraRollNode = SCNNode()
-        cameraRollNode!.addChildNode(camerasNode!)
-        
-        cameraPitchNode = SCNNode()
-        cameraPitchNode!.addChildNode(cameraRollNode!)
-        
-        cameraYawNode = SCNNode()
-        cameraYawNode!.addChildNode(cameraPitchNode!)
-        
-        scene!.rootNode.addChildNode(cameraYawNode!)
-        
-        leftSceneView?.pointOfView = leftCameraNode
-        //        rightSceneView?.pointOfView = rightCameraNode
-        
-        // Respond to user head movement. Refreshes the position of the camera 60 times per second.
-        motionManager = CMMotionManager()
-        motionManager?.deviceMotionUpdateInterval = 1.0 / 60.0
-        motionManager?.startDeviceMotionUpdatesUsingReferenceFrame(CMAttitudeReferenceFrame.XArbitraryZVertical)
-        
-        leftSceneView?.delegate = self
-        
-        leftSceneView?.playing = true
-        //        rightSceneView?.playing = true
-        
-        // Add gestures on screen
-        recognizer = UITapGestureRecognizer(target: self, action:Selector("tapTheScreen"))
-        recognizer!.delegate = self
-        view.addGestureRecognizer(recognizer!)
-        
-        panRecognizer = UIPanGestureRecognizer(target: self, action: "panGesture:")
-        view.addGestureRecognizer(panRecognizer!)
-        currentAngleX = 0
-        currentAngleY = 0
-        
+        initInViewDidLoad()
+        print("added observer")
         play()
-
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerDidFinishPlaying:", name: AVPlayerItemDidPlayToEndTimeNotification, object: player.currentItem)
     }
     
-    //observer function
-//    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-//        if keyPath == "videoDidFinishPlaying" {
-//            NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerDidFinishPlaying:", name: AVPlayerItemDidPlayToEndTimeNotification, object: player.currentItem)
-//        }
-//    }
     
     
     //MARK: Camera Orientation methods
@@ -228,7 +152,7 @@ class MonoscopicViewController: UIViewController, SCNSceneRendererDelegate, UIGe
 //                usingBlock: { [unowned self] (time) -> Void in
 //                    //self.updateSliderProgression()
 //                })
-                print("added observer")
+//                print("added observer")
 //                NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerDidFinishPlaying:", name: AVPlayerItemDidPlayToEndTimeNotification, object: player.currentItem)
         }
     }
@@ -244,6 +168,7 @@ class MonoscopicViewController: UIViewController, SCNSceneRendererDelegate, UIGe
         videoDidFinish = true
 //        button_background.hidden = false
         NSNotificationCenter.defaultCenter().removeObserver(self, name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
+//        NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerDidFinishPlaying:", name: AVPlayerItemDidPlayToEndTimeNotification, object: player.currentItem)
 
     }
     
@@ -386,6 +311,79 @@ class MonoscopicViewController: UIViewController, SCNSceneRendererDelegate, UIGe
     func doubleTapped(){
         print("DOUBLE TAPPED!")
         dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func initInViewDidLoad(){
+        pausedVidImage.hidden = true
+        finishedVidImage.hidden = true
+        
+        // detect double tap gesture
+        let tap = UITapGestureRecognizer(target: self, action: "doubleTapped")
+        tap.numberOfTapsRequired = 2
+        view.addGestureRecognizer(tap)
+        
+        //        print(videoPath)
+        leftSceneView?.backgroundColor = UIColor.blackColor()
+        
+        // Create Scene
+        scene = SCNScene()
+        leftSceneView?.scene = scene
+        
+        // Create cameras
+        let camX = 0.0 as Float
+        let camY = 0.0 as Float
+        let camZ = 0.0 as Float
+        let zFar = 50.0
+        
+        let leftCamera = SCNCamera()
+        
+        leftCamera.zFar = zFar
+        
+        let leftCameraNode = SCNNode()
+        leftCameraNode.camera = leftCamera
+        leftCameraNode.position = SCNVector3(x: camX - 0.5, y: camY, z: camZ)
+        
+        
+        camerasNode = SCNNode()
+        camerasNode!.position = SCNVector3(x: camX, y:camY, z:camZ)
+        camerasNode!.addChildNode(leftCameraNode)
+        
+        let camerasNodeAngles = getCamerasNodeAngle()
+        camerasNode!.eulerAngles = SCNVector3Make(Float(camerasNodeAngles[0]), Float(camerasNodeAngles[1]), Float(camerasNodeAngles[2]))
+        
+        cameraRollNode = SCNNode()
+        cameraRollNode!.addChildNode(camerasNode!)
+        
+        cameraPitchNode = SCNNode()
+        cameraPitchNode!.addChildNode(cameraRollNode!)
+        
+        cameraYawNode = SCNNode()
+        cameraYawNode!.addChildNode(cameraPitchNode!)
+        
+        scene!.rootNode.addChildNode(cameraYawNode!)
+        
+        leftSceneView?.pointOfView = leftCameraNode
+        //        rightSceneView?.pointOfView = rightCameraNode
+        
+        // Respond to user head movement. Refreshes the position of the camera 60 times per second.
+        motionManager = CMMotionManager()
+        motionManager?.deviceMotionUpdateInterval = 1.0 / 60.0
+        motionManager?.startDeviceMotionUpdatesUsingReferenceFrame(CMAttitudeReferenceFrame.XArbitraryZVertical)
+        
+        leftSceneView?.delegate = self
+        
+        leftSceneView?.playing = true
+        //        rightSceneView?.playing = true
+        
+        // Add gestures on screen
+        recognizer = UITapGestureRecognizer(target: self, action:Selector("tapTheScreen"))
+        recognizer!.delegate = self
+        view.addGestureRecognizer(recognizer!)
+        
+        panRecognizer = UIPanGestureRecognizer(target: self, action: "panGesture:")
+        view.addGestureRecognizer(panRecognizer!)
+        currentAngleX = 0
+        currentAngleY = 0
     }
     
 }
