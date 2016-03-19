@@ -29,6 +29,7 @@
 		49786CE81C8F9E250012ADD7 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49786CE71C8F9E250012ADD7 /* Video.swift */; };
 		49786CEB1C90BFE40012ADD7 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49786CEA1C90BFE40012ADD7 /* ImageLoader.swift */; };
 		49786CF31C90C8D50012ADD7 /* VideoInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49786CF21C90C8D50012ADD7 /* VideoInformationViewController.swift */; };
+		4983C0681C9DFF5000A44714 /* LSVRLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4983C0671C9DFF5000A44714 /* LSVRLaunchScreen.storyboard */; };
 		49E2C4A51C8E2E4E005FA591 /* lsvrOne.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 49E2C4A31C8E2E4E005FA591 /* lsvrOne.xcdatamodeld */; };
 		49E2C4A71C8E2E4E005FA591 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49E2C4A61C8E2E4E005FA591 /* Assets.xcassets */; };
 		49E2C4C91C8E2F35005FA591 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E2C4BC1C8E2F0A005FA591 /* Alamofire.framework */; };
@@ -135,6 +136,7 @@
 		49786CE71C8F9E250012ADD7 /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		49786CEA1C90BFE40012ADD7 /* ImageLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		49786CF21C90C8D50012ADD7 /* VideoInformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoInformationViewController.swift; sourceTree = "<group>"; };
+		4983C0671C9DFF5000A44714 /* LSVRLaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LSVRLaunchScreen.storyboard; sourceTree = "<group>"; };
 		49E2C4991C8E2E4E005FA591 /* lsvrOne.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = lsvrOne.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49E2C4A41C8E2E4E005FA591 /* lsvrOne.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = lsvrOne.xcdatamodel; sourceTree = "<group>"; };
 		49E2C4A61C8E2E4E005FA591 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -258,6 +260,7 @@
 			children = (
 				49E2C4D21C8E2F9A005FA591 /* LaunchScreen.storyboard */,
 				49E2C4D31C8E2F9A005FA591 /* Main.storyboard */,
+				4983C0671C9DFF5000A44714 /* LSVRLaunchScreen.storyboard */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -400,6 +403,7 @@
 			files = (
 				49E2C4D81C8E2F9A005FA591 /* Main.storyboard in Resources */,
 				49E2C4A71C8E2E4E005FA591 /* Assets.xcassets in Resources */,
+				4983C0681C9DFF5000A44714 /* LSVRLaunchScreen.storyboard in Resources */,
 				49786CE51C8F802F0012ADD7 /* lightSailSettings.plist in Resources */,
 				49E2C4D71C8E2F9A005FA591 /* LaunchScreen.storyboard in Resources */,
 			);

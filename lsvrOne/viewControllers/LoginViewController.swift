@@ -92,14 +92,24 @@ class LoginViewController: UIViewController {
             parameters["password"] = password
             debugPrint(parameters)
             Alamofire.request(.POST, "http://ec2-52-91-171-36.compute-1.amazonaws.com/auth", parameters:parameters, encoding: .JSON)
+                .validate()
                 .responseJSON { response in
                     var tempResult = response.result.value as! Dictionary<String, AnyObject>
-//                    var tempArray = tempResult["token"] as! String
-//                    debugPrint(response)
+                    //check if temp result has key named token, if it doesn't then alert user of invalid login credentials.
+                    if let token = tempResult["token"]{
                     self.resultsDict["username"] = username
                     self.resultsDict["token"] = tempResult["token"] as! String
                     UserVariables.userName = username
-                    self.performSegueWithIdentifier("segueToDashboard", sender: self)
+                    self.performSegueWithIdentifier("segueToDashboard", sender: self)  
+                    }
+                    else {
+                        self.displayErrorMessage("Invalid Username or Password")
+                        self.userNameTextField.text! = ""
+                        self.passwordTextField.text! = ""
+                    }
+//                    var tempArray = tempResult["token"] as! String
+//                    debugPrint(response)
+
             }
 
 
