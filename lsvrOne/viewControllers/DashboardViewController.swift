@@ -94,7 +94,7 @@ class DashboardViewController: UIViewController, UITableViewDelegate, UITableVie
     
     //function that selects a given video from thumbnail, gathers necessary information in preparation to send to VideoInformationViewController, then calls proper segue.
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        print("I LIKE TURTLES")
+//        print("I LIKE TURTLES")
         let indexPath = tableView.indexPathForSelectedRow!
         let cell = tableView.cellForRowAtIndexPath(indexPath)! as! VideoTableCell
 //        videoTitle = cell.videoTitle.text!
@@ -140,5 +140,8 @@ class DashboardViewController: UIViewController, UITableViewDelegate, UITableVie
             let controller = navigationController.topViewController as! LogOutViewController
             controller.currentUserName = userName
         }
+    }
+    deinit {
+        performSegueWithIdentifier("segueToVideoInfo", sender: self)
     }
 }

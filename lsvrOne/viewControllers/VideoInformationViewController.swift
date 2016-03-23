@@ -212,6 +212,8 @@ class VideoInformationViewController: UIViewController {
         return false
     }
     
-    
+    deinit {
+        checkIfFileExists(vidFileName)
+    }
 }
 

@@ -199,20 +199,41 @@ class StereocopicViewController: UIViewController, SCNSceneRendererDelegate, UIG
     }
     
     //Mark: Render the scenes
+//    func renderer(aRenderer: SCNSceneRenderer, updateAtTime time: NSTimeInterval){
+//        let qualityOfServiceClass = QOS_CLASS_BACKGROUND
+//        let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
+//        // Render the scene
+//        dispatch_async(backgroundQueue, { [weak self]() -> Void in
+//            if let mm = self!.motionManager, let motion = mm.deviceMotion {
+//                let currentAttitude = motion.attitude
+//                
+//                var roll : Double = currentAttitude.roll
+//                if(UIApplication.sharedApplication().statusBarOrientation == UIInterfaceOrientation.LandscapeRight){ roll = -1.0 * (-M_PI - roll)}
+//                
+//                self!.cameraRollNode!.eulerAngles.x = Float(roll)
+//                self!.cameraPitchNode!.eulerAngles.z = Float(currentAttitude.pitch)
+//                self!.cameraYawNode!.eulerAngles.y = Float(currentAttitude.yaw)
+//                
+//            }
+//        })
+//    }
     func renderer(aRenderer: SCNSceneRenderer, updateAtTime time: NSTimeInterval){
-        
-        // Render the scene
-        dispatch_async(dispatch_get_main_queue()) { () -> Void in
-            if let mm = self.motionManager, let motion = mm.deviceMotion {
-                let currentAttitude = motion.attitude
-                
-                var roll : Double = currentAttitude.roll
-                if(UIApplication.sharedApplication().statusBarOrientation == UIInterfaceOrientation.LandscapeRight){ roll = -1.0 * (-M_PI - roll)}
-                
-                self.cameraRollNode!.eulerAngles.x = Float(roll)
-                self.cameraPitchNode!.eulerAngles.z = Float(currentAttitude.pitch)
-                self.cameraYawNode!.eulerAngles.y = Float(currentAttitude.yaw)
-                
+        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+        dispatch_async(dispatch_get_global_queue(priority, 0)) {
+            // do some task
+            dispatch_async(dispatch_get_main_queue()) { Void in
+                // update some UI
+                if let mm = self.motionManager, let motion = mm.deviceMotion {
+                    let currentAttitude = motion.attitude
+                    
+                    var roll : Double = currentAttitude.roll
+                    if(UIApplication.sharedApplication().statusBarOrientation == UIInterfaceOrientation.LandscapeRight){ roll = -1.0 * (-M_PI - roll)}
+                    
+                    self.cameraRollNode!.eulerAngles.x = Float(roll)
+                    self.cameraPitchNode!.eulerAngles.z = Float(currentAttitude.pitch)
+                    self.cameraYawNode!.eulerAngles.y = Float(currentAttitude.yaw)
+                    
+                }
             }
         }
     }
@@ -297,7 +318,7 @@ class StereocopicViewController: UIViewController, SCNSceneRendererDelegate, UIG
         
         let rightCameraNode = SCNNode()
         rightCameraNode.camera = rightCamera
-        rightCameraNode.position = SCNVector3(x: camX - 0.5, y: camY, z: camZ)
+        rightCameraNode.position = SCNVector3(x: camX + 0.5, y: camY, z: camZ)
         
         camerasNode = SCNNode()
         camerasNode!.position = SCNVector3(x: camX, y:camY, z:camZ)
@@ -307,7 +328,7 @@ class StereocopicViewController: UIViewController, SCNSceneRendererDelegate, UIG
         let camerasNodeAngles = getCamerasNodeAngle()
         camerasNode!.eulerAngles = SCNVector3Make(Float(camerasNodeAngles[0]), Float(camerasNodeAngles[1]), Float(camerasNodeAngles[2]))
         
-        cameraRollNode = SCNNode()
+        cameraRollNode =  SCNNode()
         cameraRollNode!.addChildNode(camerasNode!)
         
         cameraPitchNode = SCNNode()

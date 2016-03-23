@@ -317,6 +317,7 @@
 				TargetAttributes = {
 					49E2C4981C8E2E4E005FA591 = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = ZM98VS6JFF;
 					};
 				};
 			};
@@ -532,10 +533,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				INFOPLIST_FILE = lsvrOne/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.micahchiang.lsvrOne;
+				PRODUCT_BUNDLE_IDENTIFIER = com.micahchiang.lsvr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -544,10 +546,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				INFOPLIST_FILE = lsvrOne/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.micahchiang.lsvrOne;
+				PRODUCT_BUNDLE_IDENTIFIER = com.micahchiang.lsvr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
