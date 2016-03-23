@@ -68,7 +68,8 @@ class StereocopicViewController: UIViewController, SCNSceneRendererDelegate, UIG
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        let value = UIInterfaceOrientation.LandscapeLeft.rawValue
+        UIDevice.currentDevice().setValue(value, forKey: "orientation")
         initInViewDidLoad()
         print("added Observer")
         play()
@@ -227,7 +228,7 @@ class StereocopicViewController: UIViewController, SCNSceneRendererDelegate, UIG
                     let currentAttitude = motion.attitude
                     
                     var roll : Double = currentAttitude.roll
-                    if(UIApplication.sharedApplication().statusBarOrientation == UIInterfaceOrientation.LandscapeRight){ roll = -1.0 * (-M_PI - roll)}
+//                    if(UIApplication.sharedApplication().statusBarOrientation == UIInterfaceOrientation.LandscapeRight){ roll = -1.0 * (-M_PI - roll)}
                     
                     self.cameraRollNode!.eulerAngles.x = Float(roll)
                     self.cameraPitchNode!.eulerAngles.z = Float(currentAttitude.pitch)
@@ -361,5 +362,13 @@ class StereocopicViewController: UIViewController, SCNSceneRendererDelegate, UIG
         view.addGestureRecognizer(panRecognizer!)
         currentAngleX = 0
         currentAngleY = 0
+    }
+    
+    override func shouldAutorotate() -> Bool {
+        return false
+    }
+    
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return [UIInterfaceOrientationMask.LandscapeLeft,UIInterfaceOrientationMask.LandscapeRight]
     }
 }

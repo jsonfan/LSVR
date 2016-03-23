@@ -78,7 +78,8 @@ class MonoscopicViewController: UIViewController, SCNSceneRendererDelegate, UIGe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        let value = UIInterfaceOrientation.LandscapeLeft.rawValue
+        UIDevice.currentDevice().setValue(value, forKey: "orientation")
         initInViewDidLoad()
         print("added observer")
         play()
@@ -232,7 +233,7 @@ class MonoscopicViewController: UIViewController, SCNSceneRendererDelegate, UIGe
                 let currentAttitude = motion.attitude
                 
                 var roll : Double = currentAttitude.roll
-                if(UIApplication.sharedApplication().statusBarOrientation == UIInterfaceOrientation.LandscapeRight){ roll = -1.0 * (-M_PI - roll)}
+//                if(UIApplication.sharedApplication().statusBarOrientation == UIInterfaceOrientation.LandscapeRight){ roll = -1.0 * (-M_PI - roll)}
                 
                 self.cameraRollNode!.eulerAngles.x = Float(roll)
                 self.cameraPitchNode!.eulerAngles.z = Float(currentAttitude.pitch)
@@ -386,4 +387,11 @@ class MonoscopicViewController: UIViewController, SCNSceneRendererDelegate, UIGe
         currentAngleY = 0
     }
     
+    override func shouldAutorotate() -> Bool {
+        return false
+    }
+    
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return [UIInterfaceOrientationMask.LandscapeLeft,UIInterfaceOrientationMask.LandscapeRight]
+    }
 }

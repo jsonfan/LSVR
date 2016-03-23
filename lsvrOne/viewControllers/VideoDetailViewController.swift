@@ -40,7 +40,8 @@ class VideoDetailViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
+        let value = UIInterfaceOrientation.Portrait.rawValue
+        UIDevice.currentDevice().setValue(value, forKey: "orientation")
         // SET NAV IMAGE TO LOGO
 //        var nav = self.navigationController?.navigationBar
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
@@ -83,6 +84,10 @@ class VideoDetailViewController: UIViewController {
             let navigationController = segue.destinationViewController as! UINavigationController
             let controller = navigationController.topViewController as! LogOutViewController
         }
+    }
+    
+    override func shouldAutorotate() -> Bool {
+        return false
     }
 
 }

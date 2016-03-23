@@ -44,7 +44,8 @@ class VideoInformationViewController: UIViewController {
     var reachability: Reachability?
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        let value = UIInterfaceOrientation.Portrait.rawValue
+        UIDevice.currentDevice().setValue(value, forKey: "orientation")
 //        let path = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
 //        let url = NSURL(fileURLWithPath: path)
 //        let filePath = url.URLByAppendingPathComponent(vidFileName+".mp4").absoluteString
@@ -197,6 +198,9 @@ class VideoInformationViewController: UIViewController {
 //            controller.currentUserName = userCompanyName
         }
     }
+    override func shouldAutorotate() -> Bool {
+        return false
+    }
     
     func checkIfFileExists (fileName: String)->Bool{
         let path = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
@@ -215,5 +219,7 @@ class VideoInformationViewController: UIViewController {
     deinit {
         checkIfFileExists(vidFileName)
     }
+    
+    
 }
 

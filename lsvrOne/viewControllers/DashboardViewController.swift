@@ -43,6 +43,9 @@ class DashboardViewController: UIViewController, UITableViewDelegate, UITableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let value = UIInterfaceOrientation.Portrait.rawValue
+        UIDevice.currentDevice().setValue(value, forKey: "orientation")
         //retrieves video list for logged in user.
         getAssets(currentUser["token"]!)
         userName = currentUser["username"]!
@@ -121,7 +124,17 @@ class DashboardViewController: UIViewController, UITableViewDelegate, UITableVie
         }
 
     }
-    
+    override func shouldAutorotate() -> Bool {
+        return false
+    }
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.Portrait
+    }
+    override func preferredInterfaceOrientationForPresentation() -> UIInterfaceOrientation {
+        
+        // Only allow Portrait
+        return UIInterfaceOrientation.Portrait
+    }
     //function sends video information to VideoInformationViewController needed to download a video.
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "segueToVideoInfo" {
@@ -144,4 +157,6 @@ class DashboardViewController: UIViewController, UITableViewDelegate, UITableVie
     deinit {
         performSegueWithIdentifier("segueToVideoInfo", sender: self)
     }
+    
+    
 }

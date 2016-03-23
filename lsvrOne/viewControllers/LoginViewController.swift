@@ -32,6 +32,9 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        let value = UIInterfaceOrientation.Portrait.rawValue
+        UIDevice.currentDevice().setValue(value, forKey: "orientation")
+        
         userNameTextField.attributedPlaceholder = NSAttributedString(string:"Username",
             attributes:[NSForegroundColorAttributeName: UIColor.whiteColor()])
         passwordTextField.attributedPlaceholder = NSAttributedString(string:"Password",
@@ -170,6 +173,11 @@ class LoginViewController: UIViewController {
     
     deinit {
        Alamofire.Request
+    }
+    
+    
+    override func shouldAutorotate() -> Bool {
+        return false
     }
 }
 

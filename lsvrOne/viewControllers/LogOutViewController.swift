@@ -21,7 +21,8 @@ class LogOutViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        let value = UIInterfaceOrientation.Portrait.rawValue
+        UIDevice.currentDevice().setValue(value, forKey: "orientation")
         // Do any additional setup after loading the view.
         companyNameLabel.text! = UserVariables.userName
     }
@@ -31,5 +32,8 @@ class LogOutViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func shouldAutorotate() -> Bool {
+        return false
+    }
 
 }

@@ -33,7 +33,8 @@ class WatchInstructionsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        let value = UIInterfaceOrientation.Portrait.rawValue
+        UIDevice.currentDevice().setValue(value, forKey: "orientation")
         // Do any additional setup after loading the view.
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
         imageView.contentMode = .ScaleAspectFit
@@ -73,5 +74,8 @@ class WatchInstructionsViewController: UIViewController {
     deinit {
         performSegueWithIdentifier("stereoSegue", sender: self)
         performSegueWithIdentifier("monoSegue", sender: self)
+    }
+    override func shouldAutorotate() -> Bool {
+        return false
     }
 }
