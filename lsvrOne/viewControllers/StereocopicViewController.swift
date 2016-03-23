@@ -68,6 +68,7 @@ class StereocopicViewController: UIViewController, SCNSceneRendererDelegate, UIG
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        UIApplication.sharedApplication().statusBarOrientation = UIInterfaceOrientation.LandscapeLeft
         let value = UIInterfaceOrientation.LandscapeLeft.rawValue
         UIDevice.currentDevice().setValue(value, forKey: "orientation")
         initInViewDidLoad()
@@ -229,7 +230,7 @@ class StereocopicViewController: UIViewController, SCNSceneRendererDelegate, UIG
                     
                     var roll : Double = currentAttitude.roll
 //                    if(UIApplication.sharedApplication().statusBarOrientation == UIInterfaceOrientation.LandscapeRight){ roll = -1.0 * (-M_PI - roll)}
-                    
+//                    roll = -1.0 * (-M_PI - roll)
                     self.cameraRollNode!.eulerAngles.x = Float(roll)
                     self.cameraPitchNode!.eulerAngles.z = Float(currentAttitude.pitch)
                     self.cameraYawNode!.eulerAngles.y = Float(currentAttitude.yaw)
@@ -370,5 +371,8 @@ class StereocopicViewController: UIViewController, SCNSceneRendererDelegate, UIG
     
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         return [UIInterfaceOrientationMask.LandscapeLeft,UIInterfaceOrientationMask.LandscapeRight]
+    }
+    override func prefersStatusBarHidden() -> Bool {
+        return true
     }
 }

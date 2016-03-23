@@ -42,6 +42,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
     }
-
+    
+    func application (application: UIApplication, supportedInterfaceOrientationsForWindow window: UIWindow?) -> UIInterfaceOrientationMask {
+        return checkOrientation(self.window?.rootViewController)
+    }
+    
+    func checkOrientation (viewController: UIViewController?) -> UIInterfaceOrientationMask {
+        if viewController is StereocopicViewController {
+            return .LandscapeLeft
+        }
+        
+        if viewController is MonoscopicViewController {
+            return .LandscapeLeft
+        }
+        
+        return .Portrait
+    }
 }
 

@@ -78,8 +78,8 @@ class MonoscopicViewController: UIViewController, SCNSceneRendererDelegate, UIGe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let value = UIInterfaceOrientation.LandscapeLeft.rawValue
-        UIDevice.currentDevice().setValue(value, forKey: "orientation")
+//        let value = UIInterfaceOrientation.LandscapeLeft.rawValue
+//        UIDevice.currentDevice().setValue(value, forKey: "orientation")
         initInViewDidLoad()
         print("added observer")
         play()
@@ -106,7 +106,9 @@ class MonoscopicViewController: UIViewController, SCNSceneRendererDelegate, UIGe
             camerasNodeAngle1 = 0.0
             camerasNodeAngle2 = M_PI
         }
-        
+//        camerasNodeAngle1 = 0.0
+//        camerasNodeAngle2 = M_PI
+//        
         return [ -M_PI_2, camerasNodeAngle1, camerasNodeAngle2 ]
     }
     
@@ -233,8 +235,8 @@ class MonoscopicViewController: UIViewController, SCNSceneRendererDelegate, UIGe
                 let currentAttitude = motion.attitude
                 
                 var roll : Double = currentAttitude.roll
-//                if(UIApplication.sharedApplication().statusBarOrientation == UIInterfaceOrientation.LandscapeRight){ roll = -1.0 * (-M_PI - roll)}
-                
+                if(UIApplication.sharedApplication().statusBarOrientation == UIInterfaceOrientation.LandscapeRight){ roll = -1.0 * (-M_PI - roll)}
+//                roll = -1.0 * (-M_PI - roll)
                 self.cameraRollNode!.eulerAngles.x = Float(roll)
                 self.cameraPitchNode!.eulerAngles.z = Float(currentAttitude.pitch)
                 self.cameraYawNode!.eulerAngles.y = Float(currentAttitude.yaw)
@@ -387,11 +389,14 @@ class MonoscopicViewController: UIViewController, SCNSceneRendererDelegate, UIGe
         currentAngleY = 0
     }
     
-    override func shouldAutorotate() -> Bool {
-        return false
-    }
-    
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return [UIInterfaceOrientationMask.LandscapeLeft,UIInterfaceOrientationMask.LandscapeRight]
+//    override func shouldAutorotate() -> Bool {
+//        return false
+//    }
+//    
+//    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+//        return [UIInterfaceOrientationMask.LandscapeLeft,UIInterfaceOrientationMask.LandscapeRight]
+//    }
+    override func prefersStatusBarHidden() -> Bool {
+        return true
     }
 }
