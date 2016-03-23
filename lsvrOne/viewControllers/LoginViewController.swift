@@ -179,5 +179,6 @@ class LoginViewController: UIViewController {
     override func shouldAutorotate() -> Bool {
         return false
     }
+    
 }
 
