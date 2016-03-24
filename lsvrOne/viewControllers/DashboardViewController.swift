@@ -78,7 +78,9 @@ class DashboardViewController: UIViewController, UITableViewDelegate, UITableVie
     //assigns video title and desc to each cell, then return. videoIdentification is used for downloading video later on.
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: VideoTableCell = tableView.dequeueReusableCellWithIdentifier("cell")! as! VideoTableCell
-
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = UIColor.clearColor()
+        cell.selectedBackgroundView = backgroundView
         let video: Dictionary<String, AnyObject>
         //if video["key"] always equals video file name, then use key as a means to check if file exists. 
         video = vidsAvailable[indexPath.row]
@@ -105,6 +107,7 @@ class DashboardViewController: UIViewController, UITableViewDelegate, UITableVie
         videoPic = cell.videoThumbNail?.image!
         videoID = cell.videoIdentification
         videoFileName = cell.videoName
+        
         //print(videoTitle, videoDesc, videoPic, videoID)
         performSegueWithIdentifier("segueToVideoInfo", sender: self)
     }

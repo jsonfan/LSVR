@@ -10,6 +10,9 @@ import UIKit
 
 class LogOutViewController: UIViewController {
 
+    @IBOutlet weak var loggedInLabel: UILabel!
+    
+    @IBOutlet weak var logoutButton: UIButton!
     @IBOutlet weak var companyNameLabel: UILabel!
     var currentUserName: String!
     
@@ -25,7 +28,9 @@ class LogOutViewController: UIViewController {
         UIDevice.currentDevice().setValue(value, forKey: "orientation")
         // Do any additional setup after loading the view.
         companyNameLabel.text! = UserVariables.userName
-    }
+        loggedInLabel.font = UIFont(name:"Gotham Light Thin", size: 18.0)
+        logoutButton.titleLabel!.font = UIFont.boldSystemFontOfSize(15)
+        }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
