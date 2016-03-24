@@ -71,10 +71,7 @@ class WatchInstructionsViewController: UIViewController {
             let controller = navigationController.topViewController as! LogOutViewController
         }
     }
-    deinit {
-        performSegueWithIdentifier("stereoSegue", sender: self)
-        performSegueWithIdentifier("monoSegue", sender: self)
-    }
+
     override func shouldAutorotate() -> Bool {
         return false
     }

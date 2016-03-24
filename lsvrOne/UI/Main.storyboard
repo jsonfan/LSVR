@@ -89,7 +89,7 @@
                                 </constraints>
                                 <state key="normal" backgroundImage="sign_in_button"/>
                                 <connections>
-                                    <action selector="signInButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LAQ-S0-bF6"/>
+                                    <action selector="signInButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7Kr-t4-Wme"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ib-pz-CIL">

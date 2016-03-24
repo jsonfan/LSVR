@@ -157,9 +157,4 @@ class DashboardViewController: UIViewController, UITableViewDelegate, UITableVie
             controller.currentUserName = userName
         }
     }
-    deinit {
-        performSegueWithIdentifier("segueToVideoInfo", sender: self)
-    }
-    
-    
 }

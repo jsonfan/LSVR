@@ -9,13 +9,14 @@
 import UIKit
 import Alamofire
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
     
     
     @IBOutlet weak var userNameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
 
     var resultsDict: Dictionary<String, String> = [:]
+    
     
     //logout functionality
     @IBAction func unwindToVC(segue: UIStoryboardSegue){
@@ -31,7 +32,11 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: self.view.window)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: self.view.window)
         
+        passwordTextField.delegate = self
+    
         let value = UIInterfaceOrientation.Portrait.rawValue
         UIDevice.currentDevice().setValue(value, forKey: "orientation")
         
@@ -74,13 +79,51 @@ class LoginViewController: UIViewController {
             print("Unable to start notifier")
         }
     }
-
+// functions for moving keyboard
+    func keyboardWillHide(sender: NSNotification) {
+        let userInfo: [NSObject : AnyObject] = sender.userInfo!
+        let keyboardSize: CGSize = userInfo[UIKeyboardFrameBeginUserInfoKey]!.CGRectValue.size
+        self.view.frame.origin.y += keyboardSize.height
+    }
+    
+    func keyboardWillShow(sender: NSNotification) {
+        let userInfo: [NSObject : AnyObject] = sender.userInfo!
+        
+        let keyboardSize: CGSize = userInfo[UIKeyboardFrameBeginUserInfoKey]!.CGRectValue.size
+        let offset: CGSize = userInfo[UIKeyboardFrameEndUserInfoKey]!.CGRectValue.size
+        
+        if keyboardSize.height == offset.height {
+            if self.view.frame.origin.y == 0 {
+                UIView.animateWithDuration(0.1, animations: { () -> Void in
+                    self.view.frame.origin.y -= keyboardSize.height
+                })
+            }
+        } else {
+            UIView.animateWithDuration(0.1, animations: { () -> Void in
+                self.view.frame.origin.y += keyboardSize.height - offset.height
+            })
+        }
+        print(self.view.frame.origin.y)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    @IBAction func signInButtonTapped(sender: UIButton) {
+    
+//methods for sign in
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        signInButtonTapped()
+        return true
+    }
+    
+    @IBAction func signInButton(sender: UIButton) {
+        signInButtonTapped()
+    }
+    //gets called by either keyboard or sign in button
+   func signInButtonTapped() {
         let username = userNameTextField.text!
         let password = passwordTextField.text!
         
@@ -140,10 +183,10 @@ class LoginViewController: UIViewController {
     }
     
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?){
-        view.endEditing(true)
-        super.touchesBegan(touches, withEvent: event)
-    }
+//    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?){
+//        view.endEditing(true)
+//        super.touchesBegan(touches, withEvent: event)
+//    }
     
 //    override func shouldAutorotate() -> Bool {
 //        return false
@@ -173,12 +216,13 @@ class LoginViewController: UIViewController {
     
     deinit {
        Alamofire.Request
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: self.view.window)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: self.view.window)
     }
     
     
     override func shouldAutorotate() -> Bool {
         return false
     }
-    
 }
 
