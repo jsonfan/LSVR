@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "lsvrOne/viewControllers/VideoInformationViewController.swift"
-            timestampString = "480032420.430648"
+            timestampString = "480556609.206586"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "75"
-            endingLineNumber = "75"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
             landmarkName = "viewDidLoad()"
             landmarkType = "5">
          </BreakpointContent>
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "lsvrOne/viewControllers/VideoInformationViewController.swift"
-            timestampString = "480032420.430648"
+            timestampString = "480556609.206586"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "203"
-            endingLineNumber = "203"
+            startingLineNumber = "219"
+            endingLineNumber = "219"
             landmarkName = "shouldAutorotate()"
             landmarkType = "5">
          </BreakpointContent>
@@ -122,11 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "lsvrOne/viewControllers/VideoInformationViewController.swift"
-            timestampString = "480114478.941303"
+            timestampString = "480556609.206586"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "138"
-            endingLineNumber = "138"
+            startingLineNumber = "147"
+            endingLineNumber = "147"
             landmarkName = "downloadButtonTapped(_:)"
             landmarkType = "5">
          </BreakpointContent>

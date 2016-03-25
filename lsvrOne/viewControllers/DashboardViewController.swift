@@ -26,6 +26,7 @@ class DashboardViewController: UIViewController, UITableViewDelegate, UITableVie
 
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var loadingScreen: UIImageView!
     
     @IBOutlet weak var navBarItem: UINavigationItem!
     
@@ -81,6 +82,9 @@ class DashboardViewController: UIViewController, UITableViewDelegate, UITableVie
         let backgroundView = UIView()
         backgroundView.backgroundColor = UIColor.clearColor()
         cell.selectedBackgroundView = backgroundView
+        if cell.videoThumbNail?.image == nil {
+            loadingScreen.hidden = false
+        }
         let video: Dictionary<String, AnyObject>
         //if video["key"] always equals video file name, then use key as a means to check if file exists. 
         video = vidsAvailable[indexPath.row]
@@ -93,6 +97,7 @@ class DashboardViewController: UIViewController, UITableViewDelegate, UITableVie
         cell.videoName = video["key"] as! String
         ImageLoader.sharedLoader.imageForUrl(thumbnailURL, completionHandler: {(image: UIImage?, url: String) in
             cell.videoThumbNail?.image = image!
+            self.loadingScreen.hidden = true
         })
         return cell
     }

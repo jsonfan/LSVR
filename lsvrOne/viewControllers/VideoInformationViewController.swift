@@ -18,6 +18,9 @@ class VideoInformationViewController: UIViewController {
     @IBOutlet weak var downloadProgress: UIProgressView!
     @IBOutlet weak var downloadButton: UIButton!
     @IBOutlet weak var playButton: UIButton!
+    //for progress bar
+    @IBOutlet weak var totalMegabytesLabel: UILabel!
+    @IBOutlet weak var percentDoneLabel: UILabel!
     
     @IBAction func navBackButtonTapped(sender: UIBarButtonItem) {
         dismissViewControllerAnimated(true, completion: nil)
@@ -66,6 +69,10 @@ class VideoInformationViewController: UIViewController {
         downloadProgress.transform = CGAffineTransformScale(downloadProgress.transform, 1, 30)
         downloadProgress.setProgress(0.0, animated: false)
         downloadProgress.hidden = true
+        totalMegabytesLabel.text! = "0/0"
+        percentDoneLabel.text! = "0%"
+        totalMegabytesLabel.hidden = true
+        percentDoneLabel.hidden = true
         
         var nav = self.navigationController?.navigationBar
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
@@ -134,6 +141,8 @@ class VideoInformationViewController: UIViewController {
         //else, download:
         else {
             downloadProgress.hidden = false
+            percentDoneLabel.hidden = false
+            totalMegabytesLabel.hidden = false
             downloadButton.hidden = true
             print("connected to wifi")
             Alamofire.request(.GET, "http://ec2-52-91-171-36.compute-1.amazonaws.com/assets/"+vidID+"?token="+userToken)
@@ -163,7 +172,12 @@ class VideoInformationViewController: UIViewController {
                         // This closure is NOT called on the main queue for performance
                         // reasons. To update your ui, dispatch to the main queue.
                         dispatch_async(dispatch_get_main_queue()) {
+                            let percentage = Int(floor((Float(totalBytesRead)/Float(totalBytesExpectedToRead))*100))
+                            let fractionDone = Int(floor((Float(totalBytesRead))/1000000))
+                            let totalFraction = Int((floor(Float(totalBytesExpectedToRead))/1000000))
                             print("Total bytes read on main queue: \(totalBytesRead)")
+                            self.percentDoneLabel.text! = "\(percentage)%"
+                            self.totalMegabytesLabel.text! = "\(fractionDone)/\(totalFraction)"
                             self.downloadProgress.setProgress(Float(totalBytesRead)/Float(totalBytesExpectedToRead), animated: true)
                         }
                     }
@@ -181,6 +195,8 @@ class VideoInformationViewController: UIViewController {
                             self.vidName = finalPath?.lastPathComponent as String!
                             self.playButton.hidden = false
                             self.downloadProgress.hidden = true
+                            self.totalMegabytesLabel.hidden = true
+                            self.percentDoneLabel.hidden = true
                         }
                     }
                 }
