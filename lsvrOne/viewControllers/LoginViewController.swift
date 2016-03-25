@@ -24,8 +24,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
     //remove all files in documents directory
         removeAllFilesFromDocumentsDirectory()
-
+        
         print("\(UserVariables.userName)")
+        
+        NSUserDefaults.standardUserDefaults().removeObjectForKey("username")
+        NSUserDefaults.standardUserDefaults().removeObjectForKey("password")
         print("logout successful, bitches be trippin")
     }
     
@@ -77,6 +80,46 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             try reachability.startNotifier()
         } catch {
             print("Unable to start notifier")
+        }
+        
+        //check if there was a successful user login
+        if NSUserDefaults.standardUserDefaults().objectForKey("username") != nil {
+            print("there is a username stored")
+            let userName = NSUserDefaults.standardUserDefaults().objectForKey("username") as! String
+            let password = NSUserDefaults.standardUserDefaults().objectForKey("password") as! String
+            autoLogin(userName, password: password)
+        }
+        else {
+            print("no user yet")
+        }
+
+        
+    }
+    
+    func autoLogin(username: String, password: String){
+        var parameters: Dictionary<String, String> = [:]
+        parameters["username"] = username
+        parameters["password"] = password
+        debugPrint(parameters)
+        Alamofire.request(.POST, "http://ec2-52-91-171-36.compute-1.amazonaws.com/auth", parameters:parameters, encoding: .JSON)
+            .validate()
+            .responseJSON { response in
+                var tempResult = response.result.value as! Dictionary<String, AnyObject>
+                //check if temp result has key named token, if it doesn't then alert user of invalid login credentials.
+                if let token = tempResult["token"]{
+                    self.resultsDict["username"] = username
+                    self.resultsDict["token"] = tempResult["token"] as! String
+                    UserVariables.userName = username
+                    self.performSegueWithIdentifier("segueToDashboard", sender: self)
+                }
+                else {
+                    self.displayErrorMessage("Invalid Username or Password")
+                    self.userNameTextField.text! = ""
+                    self.passwordTextField.text! = ""
+                }
+                //                    var tempArray = tempResult["token"] as! String
+                //                    debugPrint(response)
+                
         }
     }
 // functions for moving keyboard
@@ -143,10 +186,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     var tempResult = response.result.value as! Dictionary<String, AnyObject>
                     //check if temp result has key named token, if it doesn't then alert user of invalid login credentials.
                     if let token = tempResult["token"]{
-                    self.resultsDict["username"] = username
-                    self.resultsDict["token"] = tempResult["token"] as! String
-                    UserVariables.userName = username
-                    self.performSegueWithIdentifier("segueToDashboard", sender: self)  
+                        self.resultsDict["username"] = username
+                        self.resultsDict["token"] = tempResult["token"] as! String
+                        NSUserDefaults.standardUserDefaults().setObject(username, forKey: "username")
+                        NSUserDefaults.standardUserDefaults().setObject(password, forKey: "password")
+                        UserVariables.userName = username
+                        self.performSegueWithIdentifier("segueToDashboard", sender: self)  
                     }
                     else {
                         self.displayErrorMessage("Invalid Username or Password")

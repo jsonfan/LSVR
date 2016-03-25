@@ -86,7 +86,10 @@ class MonoscopicViewController: UIViewController, SCNSceneRendererDelegate, UIGe
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerDidFinishPlaying:", name: AVPlayerItemDidPlayToEndTimeNotification, object: player.currentItem)
     }
     
-    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true);
+        UIApplication.sharedApplication().statusBarHidden=true; // for status bar hide
+    }
     
     //MARK: Camera Orientation methods
     override func willAnimateRotationToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
