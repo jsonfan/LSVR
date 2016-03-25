@@ -10,4 +10,8 @@ import Foundation
 
 struct UserVariables {
     static var userName: String!
+    static var downloadDict: Dictionary<String,Bool>! = [:]
+    static var percentage: Int!
+    static var fractionDone: Int!
+    static var totalFraction: Int!
 }

@@ -39,7 +39,7 @@ class DashboardViewController: UIViewController, UITableViewDelegate, UITableVie
     var videoTitle: String!
     var videoDesc: String!
     var videoPic: UIImage!
-    var videoID: String!
+    var vidID: String!
     var videoFileName: String!
     
     override func viewDidLoad() {
@@ -110,10 +110,8 @@ class DashboardViewController: UIViewController, UITableViewDelegate, UITableVie
 //        videoTitle = cell.videoTitle.text!
         videoDesc = cell.videoDesc
         videoPic = cell.videoThumbNail?.image!
-        videoID = cell.videoIdentification
+        vidID = cell.videoIdentification
         videoFileName = cell.videoName
-        
-        //print(videoTitle, videoDesc, videoPic, videoID)
         performSegueWithIdentifier("segueToVideoInfo", sender: self)
     }
 
@@ -151,9 +149,13 @@ class DashboardViewController: UIViewController, UITableViewDelegate, UITableVie
             controller.thumbNail = videoPic
             controller.videoInformation = videoDesc
             controller.userToken = currentUser["token"]
-            controller.vidID = videoID
+            controller.vidID = vidID
             controller.userCompanyName = userName
             controller.vidFileName = videoFileName
+            //checks if downloadDict has a key value pair of this, if it doesn't then it creates it and sets it to false. 
+            if (UserVariables.downloadDict["\(vidID)"] == nil){
+                UserVariables.downloadDict["\(vidID)"] = false
+            }
             tableView.deselectRowAtIndexPath(tableView.indexPathForSelectedRow!, animated: true)
         }
         if segue.identifier == "segueToLogoutView" {

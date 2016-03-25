@@ -45,35 +45,46 @@ class VideoInformationViewController: UIViewController {
     var vidName: String!
     var vidFileName: String!
     var reachability: Reachability?
+    
+    //used for updating progress bar after exiting and then returning to video info screen. NSTimer is fired once every second, and calls updateProgress
+    var timer = NSTimer()
+    func updateProgress() {
+            dispatch_async(dispatch_get_main_queue()){
+            self.percentDoneLabel.text! = "\(UserVariables.percentage)%"
+            self.totalMegabytesLabel.text! = "\(UserVariables.fractionDone)MB / \(UserVariables.totalFraction)MB"
+            self.downloadProgress.setProgress(Float(UserVariables.fractionDone)/Float(UserVariables.totalFraction), animated: true)
+        }
+    }
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
         let value = UIInterfaceOrientation.Portrait.rawValue
         UIDevice.currentDevice().setValue(value, forKey: "orientation")
-//        let path = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
-//        let url = NSURL(fileURLWithPath: path)
-//        let filePath = url.URLByAppendingPathComponent(vidFileName+".mp4").absoluteString
-//        let fileManager = NSFileManager.defaultManager()
-//        if fileManager.fileExistsAtPath(filePath) {
-//            self.playButton.hidden = false
-//            self.vidName = vidFileName
-//            print("file exists")
-//        }
-
 //        UINavigationBar.appearance().setBackgroundImage(UIImage(named: "ls_logo"), forBarMetrics: .Default)
         checkIfFileExists(vidFileName)
         // Do any additional setup after loading the view.
         videoThumbnail.image = thumbNail
         videoDescription.text = videoInformation
-        
-        //sets progressbar attributes.
         downloadProgress.transform = CGAffineTransformScale(downloadProgress.transform, 1, 30)
         downloadProgress.setProgress(0.0, animated: false)
+
+
+        //sets progressbar attributes. if downloadDict key value is true, then download button is hidden, and update progress is called with nstimer
+        if UserVariables.downloadDict["\(vidID)"] == true{
+            downloadButton.hidden = true
+            downloadProgress.hidden = false
+            totalMegabytesLabel.hidden = false
+            percentDoneLabel.hidden = false
+            timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "updateProgress", userInfo: nil, repeats: true)
+        } else {
         downloadProgress.hidden = true
         totalMegabytesLabel.text! = "0/0"
         percentDoneLabel.text! = "0%"
         totalMegabytesLabel.hidden = true
         percentDoneLabel.hidden = true
-        
+            print(UserVariables.downloadDict["\(vidID)"])
+        }
         var nav = self.navigationController?.navigationBar
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
         imageView.contentMode = .ScaleAspectFit
@@ -86,10 +97,6 @@ class VideoInformationViewController: UIViewController {
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.translucent = true
         //hide play button
-        
-        //check if file exists
-
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -140,6 +147,7 @@ class VideoInformationViewController: UIViewController {
         }
         //else, download:
         else {
+            UserVariables.downloadDict["\(vidID)"] = true
             downloadProgress.hidden = false
             percentDoneLabel.hidden = false
             totalMegabytesLabel.hidden = false
@@ -172,12 +180,12 @@ class VideoInformationViewController: UIViewController {
                         // This closure is NOT called on the main queue for performance
                         // reasons. To update your ui, dispatch to the main queue.
                         dispatch_async(dispatch_get_main_queue()) {
-                            let percentage = Int(floor((Float(totalBytesRead)/Float(totalBytesExpectedToRead))*100))
-                            let fractionDone = Int(floor((Float(totalBytesRead))/1000000))
-                            let totalFraction = Int((floor(Float(totalBytesExpectedToRead))/1000000))
+                            UserVariables.percentage = Int(floor((Float(totalBytesRead)/Float(totalBytesExpectedToRead))*100))
+                            UserVariables.fractionDone = Int(floor((Float(totalBytesRead))/1000000))
+                            UserVariables.totalFraction = Int((floor(Float(totalBytesExpectedToRead))/1000000))
                             print("Total bytes read on main queue: \(totalBytesRead)")
-                            self.percentDoneLabel.text! = "\(percentage)%"
-                            self.totalMegabytesLabel.text! = "\(fractionDone)/\(totalFraction)"
+                            self.percentDoneLabel.text! = "\(UserVariables.percentage)%"
+                            self.totalMegabytesLabel.text! = "\(UserVariables.fractionDone)MB / \(UserVariables.totalFraction)MB"
                             self.downloadProgress.setProgress(Float(totalBytesRead)/Float(totalBytesExpectedToRead), animated: true)
                         }
                     }
@@ -226,6 +234,7 @@ class VideoInformationViewController: UIViewController {
             self.playButton.hidden = false
             self.vidName = fileName+".mp4"
             print("file exists")
+            UserVariables.downloadDict["\(vidID)"] = false
             return true
         }
         self.playButton.hidden = true
@@ -235,7 +244,6 @@ class VideoInformationViewController: UIViewController {
 //    deinit {
 //        checkIfFileExists(vidFileName)
 //    }
-    
-    
+
 }
 
