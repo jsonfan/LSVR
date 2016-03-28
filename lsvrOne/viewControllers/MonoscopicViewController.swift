@@ -78,18 +78,19 @@ class MonoscopicViewController: UIViewController, SCNSceneRendererDelegate, UIGe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        let value = UIInterfaceOrientation.LandscapeLeft.rawValue
-//        UIDevice.currentDevice().setValue(value, forKey: "orientation")
+        UIApplication.sharedApplication().statusBarOrientation = UIInterfaceOrientation.LandscapeLeft
+        let value = UIInterfaceOrientation.LandscapeLeft.rawValue
+        UIDevice.currentDevice().setValue(value, forKey: "orientation")
         initInViewDidLoad()
         print("added observer")
         play()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerDidFinishPlaying:", name: AVPlayerItemDidPlayToEndTimeNotification, object: player.currentItem)
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(true);
-        UIApplication.sharedApplication().statusBarHidden=true; // for status bar hide
-    }
+//    override func viewWillAppear(animated: Bool) {
+//        super.viewWillAppear(true);
+//        UIApplication.sharedApplication().statusBarHidden=true; // for status bar hide
+//    }
     
     //MARK: Camera Orientation methods
     override func willAnimateRotationToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
@@ -238,7 +239,7 @@ class MonoscopicViewController: UIViewController, SCNSceneRendererDelegate, UIGe
                 let currentAttitude = motion.attitude
                 
                 var roll : Double = currentAttitude.roll
-                if(UIApplication.sharedApplication().statusBarOrientation == UIInterfaceOrientation.LandscapeRight){ roll = -1.0 * (-M_PI - roll)}
+//                if(UIApplication.sharedApplication().statusBarOrientation == UIInterfaceOrientation.LandscapeRight){ roll = -1.0 * (-M_PI - roll)}
 //                roll = -1.0 * (-M_PI - roll)
                 self.cameraRollNode!.eulerAngles.x = Float(roll)
                 self.cameraPitchNode!.eulerAngles.z = Float(currentAttitude.pitch)
@@ -392,13 +393,13 @@ class MonoscopicViewController: UIViewController, SCNSceneRendererDelegate, UIGe
         currentAngleY = 0
     }
     
-//    override func shouldAutorotate() -> Bool {
-//        return false
-//    }
-//    
-//    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-//        return [UIInterfaceOrientationMask.LandscapeLeft,UIInterfaceOrientationMask.LandscapeRight]
-//    }
+    override func shouldAutorotate() -> Bool {
+        return false
+    }
+    
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return [UIInterfaceOrientationMask.LandscapeLeft,UIInterfaceOrientationMask.LandscapeRight]
+    }
     override func prefersStatusBarHidden() -> Bool {
         return true
     }
