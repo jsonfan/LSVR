@@ -14,4 +14,5 @@ struct UserVariables {
     static var percentage: Int!
     static var fractionDone: Int!
     static var totalFraction: Int!
+    static var didFinishDownload: Bool = false
 }

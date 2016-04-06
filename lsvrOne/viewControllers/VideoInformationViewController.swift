@@ -53,7 +53,15 @@ class VideoInformationViewController: UIViewController {
             self.percentDoneLabel.text! = "\(UserVariables.percentage)%"
             self.totalMegabytesLabel.text! = "\(UserVariables.fractionDone)MB / \(UserVariables.totalFraction)MB"
             self.downloadProgress.setProgress(Float(UserVariables.fractionDone)/Float(UserVariables.totalFraction), animated: true)
+                
+                if UserVariables.fractionDone == UserVariables.totalFraction {
+                    self.downloadProgress.hidden = true
+                    self.totalMegabytesLabel.hidden = true
+                    self.percentDoneLabel.hidden = true
+                    self.playButton.hidden = false
+                }
         }
+
     }
 
 
@@ -72,12 +80,13 @@ class VideoInformationViewController: UIViewController {
 
         //sets progressbar attributes. if downloadDict key value is true, then download button is hidden, and update progress is called with nstimer
         if UserVariables.downloadDict["\(vidID)"] == true{
-            downloadButton.hidden = true
+            downloadButton.hidden = false
             downloadProgress.hidden = false
             totalMegabytesLabel.hidden = false
             percentDoneLabel.hidden = false
             timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "updateProgress", userInfo: nil, repeats: true)
-        } else {
+        }
+        else {
         downloadProgress.hidden = true
         totalMegabytesLabel.text! = "0/0"
         percentDoneLabel.text! = "0%"
@@ -148,6 +157,7 @@ class VideoInformationViewController: UIViewController {
         //else, download:
         else {
             UserVariables.downloadDict["\(vidID)"] = true
+            UserVariables.didFinishDownload = false
             downloadProgress.hidden = false
             percentDoneLabel.hidden = false
             totalMegabytesLabel.hidden = false
@@ -200,6 +210,8 @@ class VideoInformationViewController: UIViewController {
                             print("Downloaded file successfully")
 //                            print(destination)
                              print ("downloaded file to = \(finalPath)")
+                            UserVariables.downloadDict["\(self.vidID)"] = false;
+                            UserVariables.didFinishDownload = true
                             self.vidName = finalPath?.lastPathComponent as String!
                             self.playButton.hidden = false
                             self.downloadProgress.hidden = true
@@ -234,10 +246,17 @@ class VideoInformationViewController: UIViewController {
             self.playButton.hidden = false
             self.vidName = fileName+".mp4"
             print("file exists")
-            UserVariables.downloadDict["\(vidID)"] = false
+//            UserVariables.downloadDict["\(vidID)"] = false;
             return true
         }
+        if UserVariables.didFinishDownload == true {
+            self.playButton.hidden = false
+            self.downloadProgress.hidden = true
+            self.totalMegabytesLabel.hidden = true
+            self.percentDoneLabel.hidden = true
+        }
         self.playButton.hidden = true
+//        UserVariables.downloadDict["\(vidID)"] = false;
         return false
     }
     

@@ -21,7 +21,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     //logout functionality
     @IBAction func unwindToVC(segue: UIStoryboardSegue){
         UserVariables.userName = nil
-        
     //remove all files in documents directory
         removeAllFilesFromDocumentsDirectory()
         
@@ -29,7 +28,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         NSUserDefaults.standardUserDefaults().removeObjectForKey("username")
         NSUserDefaults.standardUserDefaults().removeObjectForKey("password")
-        print("logout successful, bitches be trippin")
     }
     
     override func viewDidLoad() {
